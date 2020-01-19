@@ -1,0 +1,87 @@
+body {
+    background: url(./images/bg.jpg) center no-repeat;
+    
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.container, 
+.row {
+    position: relative;
+    height: 100%;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.section-result,
+.section-search {
+    margin-top: 30px;
+    border-radius: 25px;
+    padding: 25px;
+    position: relative;
+}
+
+
+
+.section-result {
+    background: rgba(0, 0, 0, 0.3);
+    /* height: 50vh; */
+    position: relative;
+}
+
+.section-search {
+    background: rgba(0, 0, 0, 0.3);
+    /* height: 50vh; */
+    position: relative;
+}
+
+.player {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 15px;
+    height: 100%;
+    padding: 10px;
+}
+
+.section-result button,
+.section-search button {
+    background: #f42267;
+    color: #fff;
+    width: 100%;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1.5em;
+
+    box-shadow: 0 10px 0 #ff5990;
+    border-radius: 10px;
+    padding: 10px 25px;
+    transition: all 0.5s;
+    opacity: 0.7;
+}
+
+.section-result button:hover,
+.section-search button:hover {
+    box-shadow: 0 3px 0 #ff5990;
+    border-radius: 10px;
+    padding: 10px 25px;
+    transition: all 0.5s;
+    opacity: 1;
+}
+
+.counter {
+    margin: 15px;
+    width: 60px;
+    border-radius: 7px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+textarea {
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.9);
+    background: transparent;
+    color: #fff;
+}
