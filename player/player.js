@@ -1,22 +1,19 @@
-const playerElement = document.getElementById('player');
+let songs = [];
 
-function displayPlayer() {
-    player.style.display = 'block';
+function insertSong(song) {
+    songs.push(song)
 }
 
-function hidePlayer() {
-    player.style.display = 'none';
-}
+function clearSongs() {
+    songs.length = 0;
+}   
 
-function getSongUrlById(songId) {
-    const url = new URL(playerElement.getAttribute('src'));
-    const query = url.searchParams;
-    query.set('id', songId);
-    url.searchParams = query;
-    return url;
-}
+function getPlayerForSongById(id) {
+    const songIndex = songs.findIndex(s => s.id === id);
+    if (songIndex < 0)
+        return null;
 
-function setSongById(songId) {
-    playerElement.setAttribute('src', getSongUrlById(songId)); 
+    return `<iframe scrolling="no" frameborder="0" allowTransparency="true" id="player-${songIndex}"
+        src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=ff0000&layout=dark&size=medium&type=tracks&id=${id}&app_id=1"
+        width="300" height="300"></iframe>`;
 }
-
