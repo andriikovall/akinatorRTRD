@@ -1,0 +1,63 @@
+body {
+    background: url(./images/bg.jpg) center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.container, 
+.row {
+    position: relative;
+    height: 100%;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.section {
+    margin: 150px auto;
+    border-radius: 25px;
+    padding: 25px;
+    position: relative;
+}
+
+.section-result {
+    background: rgba(0, 0, 0, 0.3);
+    height: 45vh;
+    position: relative;
+}
+
+.section-search {
+    background: rgba(0, 0, 0, 0.3);
+    height: 45vh;
+    position: relative;
+}
+
+.player {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 15px;
+    height: 100%;
+    padding: 10px;
+}
+
+.section-result button,
+.section-search button {
+    background: salmon;
+    color: #fff;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.counter {
+    margin: 15px;
+    width: 60px;
+    border-radius: 7px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);; 
+}
+
+textarea {
+    border-radius: 15px;
+}
