@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="../public/style.css">
+<link rel="stylesheet" href="./modal-style.css">
+
+<div class="container">
+    <button type="button" class="btn btn-primary mx-auto" onclick="onModalOpen(event)">
+        Ну запусти меня
+    </button>
+</div>
+
+<div class="modal fade  bd-example-modal-sm" id="resultModal" tabindex="-1" role="dialog"
+    aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Is it your song?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div id="player"></div>
+                <div class="song-metadata">
+                    <table class="table table-borderless table-sm">
+                        <tr>
+                            <th>Title</th>
+                            <td id="title">songName</td>
+                        </tr>
+                        <tr>
+                            <th>Author</th>
+                            <td id="author">songAuthor</td>
+                        </tr>
+                        <tr>
+                            <th>Song link in deezer</th>
+                            <td><a href="#" id="link">Some link</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="pink-btn" data-dismiss="modal">Yes</button>
+                        </div>
+                        <div class="col text-right">
+                            <button type="button" class="pink-btn pink-btn-warn" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../source/player/player.js"></script>
+<script src="./modal.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
