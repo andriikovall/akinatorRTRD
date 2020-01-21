@@ -31,6 +31,7 @@
     <!-- My scripts -->
   <script src="./source/config.js" defer></script>
   <script src="./source/player/player.js" defer></script>
+  <script src="./source/audio_api/voice.js" defer></script>
   <script src="./source/modal.js" defer></script>
   <script src="./source/index.js" defer></script>
   <script type="text/javascript">$('#resultModal').modal({backdrop: 'static',keyboard: false})</script>
@@ -114,9 +115,7 @@
                     не понимаю, зачем это тут
                   </ul> -->
                   <div id="playerContainer">
-                    <!-- <iframe scrolling="no" frameborder="0" allowTransparency="true" id="2405728"
-                    src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=ff0000&layout=dark&size=medium&type=tracks&id=${id}&app_id=1"
-                    width="230" height="230"></iframe> -->
+                    
                     <!-- 230 - значение для дефолтной страницы. 270 для модалки, дефолтное значение функции 270 -->
                   </div>
                 </div>
@@ -132,7 +131,10 @@
         <div class="section-search text-center mx-auto">
           <div class="row">
             <div class="col-3 text-center">
-              <button class="btn" id="btn-microphone"><i class="fas fa-microphone"></i></button>
+              <button class="btn" id="searchByVoiceButton"><i class="fas fa-microphone"></i></button>
+              <!--  -->
+              
+              <!--  -->
             </div>
             <div class="col-9">
               <button class="btn btn-block" id="searchByLyricsButton">Search by text</button>
