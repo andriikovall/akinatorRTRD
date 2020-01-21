@@ -52,8 +52,14 @@
             </div>
             <div class="col-md-12 col-lg-5 col-sm-12 col-xl-5 second-column">
                 <div class="section-search text-center mx-auto">
-                    <button class="btn" >micro</button>
-                    <button class="btn" id="searchByLyricsButton">text</button>
+                  <div class="row">
+                    <div class="col-3 text-center">
+                      <button class="btn" id="btn-microphone" ><i class="fas fa-microphone"></i></button>
+                    </div>
+                    <div class="col-9">
+                      <button class="btn btn-block" id="searchByLyricsButton">Search by text</button>
+                    </div>
+                  </div>
                     <div class="text-container">
                         <textarea class="form-control" id="searchByLyricsInput" rows="10"></textarea>
                         <!-- <label for="exampleFormControlTextarea1">Large textarea</label> -->
@@ -62,6 +68,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://kit.fontawesome.com/44e5838acf.js" crossorigin="anonymous"></script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

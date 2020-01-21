@@ -40,7 +40,6 @@ body {
 .section-search button {
     background: #f42267;
     color: #fff;
-    width: 100%;
     margin-bottom: 25px;
     font-weight: 600;
     font-size: 1.5em;
@@ -54,11 +53,16 @@ body {
 
 .section-result button:hover,
 .section-search button:hover {
+    /* чисто отсебятина */
+    color: rgb(219, 218, 218);
+    /*  */
     box-shadow: 0 3px 0 #ff5990;
-    border-radius: 10px;
-    padding: 10px 25px;
     transition: all 0.5s;
     opacity: 1;
+}
+
+#btn-microphone {
+    border-radius: 50%;
 }
 
 .counter {
