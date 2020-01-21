@@ -3,6 +3,9 @@ const { startRecording, stopRecording } = (function () {
 
     function toggleRecording(cb) {
         if (recorder && recorder.state == "recording") {
+            recorder.ondataavailable = function (e) {
+                cb(e.data);
+            };
             recorder.stop();
             gumStream.getAudioTracks()[0].stop();
         } else {
@@ -11,9 +14,6 @@ const { startRecording, stopRecording } = (function () {
                 .then((stream) => {
                     gumStream = stream;
                     recorder = new MediaRecorder(stream);
-                    recorder.ondataavailable = function (e) {
-                        cb(e.data);
-                    };
                     recorder.start();
                 });
         }
@@ -46,10 +46,10 @@ const { startRecording, stopRecording } = (function () {
 
 
     return {
-        startRecording: (cb) => {
+        stopRecording: (cb) => {
             toggleRecording(fileData => makeRequest(fileData, cb));   
         },
-        stopRecording: toggleRecording
+        startRecording: toggleRecording
     }
 })();
 
