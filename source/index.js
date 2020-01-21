@@ -1,8 +1,12 @@
 const searchByLyricsButton = document.getElementById("searchByLyricsButton");
 const searchByLyricsInput = document.getElementById("searchByLyricsInput");
-const resultsListBlock = document.getElementById("resultsList");
+const resultsTableBlock = document.getElementById("resultsTable");
 const currentResultPlayer = document.getElementById("playerContainer");
+const supposeRejectionButton = document.getElementById("supposeRejectionButton");
 
+function onSupposeReject(event) {
+    renderTable();
+}
 function onSearchByLyrics(event) {
     event.preventDefault();
 
@@ -10,37 +14,58 @@ function onSearchByLyrics(event) {
     fetch(`https://api.audd.io/findLyrics/?q=${searchByLyricsInput.value}`, {
         method: 'POST',
         body: JSON.stringify({
+            return: 'timecode,apple_music,deezer,spotify',
             api_token: audApiToken,
-            result: "deezer",
         }),
-
     }).then(x => {
-        // console.log(x);
         return x.json();
     }).then(res => {
         console.log("RESPONCE");
         console.log(res);
         saveFetchResult(res);
-        renderResult();
+        showModal();
+
     }).catch(x => {
+        console.log("Error------->");
         console.log(x);
+        console.log("------->Error");
     })
 }
-function renderResult() {
-    const currAnswer = getCurrAnswers();
-    console.log(`CURR ANSER:`);
-    console.log(currAnswer);
-    if (currAnswer) {
-        resultsListBlock.innerHTML += `<li>${currAnswer[0].full_title}</li>`
-        // currAnswer.forEach(element => {
-        // });
-        // currentResultPlayer.innerHTML = createSongPlayerByDeezId(currAnswer[currAnswer.length - 1][0].song_id);
+function showModal() {
+    let answVariant = shiftAnswersArray();
+    if (!answVariant) {
+        console.log("!answVariant");
+        //TODO CASE NO ANSWERS
     }
-    console.log("Rendering...");
+    console.log("Answer Variant");
+    console.log(answVariant);
+    openModalForSong(answVariant.deezer);
+}
+// @todo
+function renderTable() {
+    const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    // resultsTableBlock.innerHTML= "";
+    if (answersHistory) {
+            let lastAnswer = answersHistory[answersHistory.length - 1];
+            resultsTableBlock.innerHTML += `<tr song_id="${lastAnswer.song_id}"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title}</td></tr>`;
+    }
+    console.log("Rendering Answers Table");
     console.log("----------------------");
 }
-function getCurrAnswers() {
-    return JSON.parse(localStorage.getItem("answers"));
+function shiftAnswersArray() {
+    console.log("shiftAnswersArr");
+    let answersArray = JSON.parse(localStorage.getItem("answers"));
+    let returnAnswer = answersArray.shift();
+    localStorage.setItem("answers", JSON.stringify(answersArray));
+
+    let answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    answersHistory.push(returnAnswer);
+    localStorage.setItem("answersHistory", JSON.stringify(answersHistory));
+    
+    return returnAnswer;
+}
+function getPossAnswer() {
+    return JSON.parse(localStorage.getItem("answers"))[0];
 }
 
 function saveFetchResult(response) {
@@ -49,6 +74,7 @@ function saveFetchResult(response) {
         localStorage.setItem("currRound", 1);
         localStorage.setItem("rounds", JSON.stringify([[], []]));
         localStorage.setItem("answers", JSON.stringify([]));
+        localStorage.setItem("answersHistory", JSON.stringify([]));
 
         console.log('!localStorage.getItem("currRound") || !localStorage.getItem("rounds")');
     }
@@ -91,12 +117,11 @@ function saveFetchResult(response) {
         if (!answerArray.length) {
             console.log("RECOMPILE>>>");
             recompileAnswers();
-        }else {
+        } else {
             console.log(`SImilars: ${answerArray}`);
             localStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
-
 
     //console.log(localStorage);
     if (currRound.length >= 5) {
@@ -127,7 +152,7 @@ function recompileAnswers() {
                 tmpIterator += 1;
             }
         }
-        
+
         console.log("Answers");
         console.log(tmpVar1.full_title);
         console.log(tmpIterator);
@@ -138,13 +163,23 @@ function recompileAnswers() {
 
     let newAnswersArray = new Array();
 
-    for(let i = resultsMatrix.length-1; i>0;i--){
-        for(let j = 0; j < resultsMatrix[i].length; j++){
+    for (let i = resultsMatrix.length - 1; i > 0; i--) {
+        for (let j = 0; j < resultsMatrix[i].length; j++) {
             newAnswersArray.push(resultsMatrix[i][j]);
         }
     }
     console.log("New Answers:");
     console.log(newAnswersArray);
+    const answHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    if (answHistory) {
+        //Deleting rejected answers
+        console.log("Deleting rejected answers...");
+        answHistory.forEach(a => {
+            newAnswersArray = newAnswersArray.filter(b => {
+                b.song_id !== a.song_id;
+            })
+        });
+    }
 
     localStorage.setItem("answers", JSON.stringify(newAnswersArray));
 }
@@ -168,3 +203,4 @@ function findSimilar(arr1, arr2) {
 }
 
 searchByLyricsButton.addEventListener("click", onSearchByLyrics);
+supposeRejectionButton.addEventListener("click", onSupposeReject);
