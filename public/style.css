@@ -2,14 +2,9 @@ body {
     background: url(./images/bg.jpg) no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     height: 100vh;
     position: relative;
-}
-
-.container, 
-.row {
-    position: relative;
-    height: 100%;
 }
 
 .no-padding {
@@ -24,7 +19,6 @@ body {
     margin-top: 30px;
     border-radius: 25px;
     padding: 25px;
-    position: relative;
     background: rgba(0, 0, 0, 0.3);
 }
 
@@ -76,7 +70,6 @@ body {
 }
 
 textarea {
-    border-radius: 15px;
     background: rgba(0, 0, 0, 0.9);
     background: transparent;
     color: #fff;
@@ -84,14 +77,22 @@ textarea {
 
 /* medium */
 @media only screen and (max-width : 992px) {
-    .first-column,
+    .section-result,
+    .section-search,
+    .alertbox {
+        margin-top: 1.2em;
+        border-radius: 15px;
+        padding: 10px;
+    }
+    /* не нужно, и так нормально работает */
+    /* .first-column,
     .second-column {
         height: 45vh;
     }
 
     textarea.form-control {
         height: 20vh;
-    }
+    } */
 }
 
 /* small */
@@ -99,27 +100,15 @@ textarea {
     .section-result,
     .section-search,
     .alertbox {
-        margin-top: 10px;
+        margin-top: 1em;
         border-radius: 15px;
         padding: 10px;
     }
-
-    .alertbox {
-        margin-top: 50px;
-    }
-
-    .player {
-        width: 220px;
-    }
-
-    .table {
-        width: 240px;
-    }
-
 }
 
 @media only screen and (max-width : 580px) {
-    .player {
+    /* не нужно, отвечаю. Сделал все через класы бутстрапа в html */
+    /* .player {
         width: 40vw;
         height: 30vh;
         margin-bottom: 0;
@@ -129,17 +118,12 @@ textarea {
         width: 45vw;
         height :30vh;
         margin-bottom: 0;
-    }
-
-    .alertbox {
-        margin-top: 40px;
-    }
-
+    } */
 }
 
 /* extra small */
 @media only screen and (max-width : 480px) {
-    .player {
+    /* .player {
         width: 40vw;
         height: 30vh;
         margin-bottom: 0;
@@ -149,9 +133,5 @@ textarea {
         width: 45vw;
         height :30vh;
         margin-bottom: 0;
-    }
-
-    .alertbox {
-        margin-top: 40px;
-    }
+    } */
 }
