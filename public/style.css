@@ -31,9 +31,8 @@ body {
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     border-radius: 15px;
-    height: 100%;
     padding: 10px;
-    min-height: 25vh;
+    width: 250px;
 }
 
 .section-result button,
@@ -88,7 +87,7 @@ textarea {
         border-radius: 15px;
         padding: 10px;
     }
-    /* не нужно, и так нормально работает */
+    /* не нужно, и так нормально работает, но оставлю пока */
     /* .first-column,
     .second-column {
         height: 45vh;
@@ -111,7 +110,7 @@ textarea {
 }
 
 @media only screen and (max-width : 580px) {
-    /* не нужно, отвечаю. Сделал все через класы бутстрапа в html */
+    /* Сделал все через класы бутстрапа в html */
     /* .player {
         width: 40vw;
         height: 30vh;
@@ -127,15 +126,5 @@ textarea {
 
 /* extra small */
 @media only screen and (max-width : 480px) {
-    /* .player {
-        width: 40vw;
-        height: 30vh;
-        margin-bottom: 0;
-    }
-
-    .table {
-        width: 45vw;
-        height :30vh;
-        margin-bottom: 0;
-    } */
+   /* Точно так же сделал через класы */
 }
