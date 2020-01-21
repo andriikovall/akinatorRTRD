@@ -1,9 +1,7 @@
-function recordAndGetSoundBlob(cb) {
+const { startRecording, stopRecording } = (function () {
     let recorder, gumStream;
-    const recordButton = document.getElementById("searchByVoiceButton");
-    recordButton.addEventListener("click", toggleRecording);
 
-    function toggleRecording() {
+    function toggleRecording(cb) {
         if (recorder && recorder.state == "recording") {
             recorder.stop();
             gumStream.getAudioTracks()[0].stop();
@@ -20,30 +18,39 @@ function recordAndGetSoundBlob(cb) {
                 });
         }
     }
-}
 
-function createFormDataFromObj(obj) {
-    const formData = new FormData();
-
-    for (const name in obj) {
-        formData.append(name, obj[name]);
+    function makeRequest(fileData, cb) {
+        const formData = createFormDataFromObj({
+            api_token: audApiToken, 
+            return: 'apple_music,deezer,spotify',
+            file: fileData
+        });
+        fetch('https://api.audd.io/', {
+            method: 'POST', 
+            body: formData
+        })
+        .then(r => r.json()) 
+        .then(cb);
+    }
+    
+    
+    function createFormDataFromObj(obj) {
+        const formData = new FormData();
+    
+        for (const name in obj) {
+            formData.append(name, obj[name]);
+        }
+    
+        return formData;
     }
 
-    return formData;
-}
 
-recordAndGetSoundBlob(data => {
-    const formData = createFormDataFromObj({
-        api_token: audApiToken, 
-        return: 'apple_music,deezer,spotify',
-        file: data
-    });
-    fetch('https://api.audd.io/', {
-        method: 'POST', 
-        body: formData
-    })
-    .then(r => r.json()) 
-    .then(res => {
-        console.log(res);
-    })
-});
+    return {
+        startRecording: (cb) => {
+            toggleRecording(fileData => makeRequest(fileData, cb));   
+        },
+        stopRecording: toggleRecording
+    }
+})();
+
+
