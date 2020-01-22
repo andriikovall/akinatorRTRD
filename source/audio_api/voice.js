@@ -22,7 +22,7 @@ const { startRecording, stopRecording } = (function () {
     function makeRequest(fileData, cb) {
         const formData = createFormDataFromObj({
             api_token: audApiToken, 
-            return: 'apple_music,deezer,spotify',
+            return: 'deezer',
             file: fileData
         });
         fetch('https://api.audd.io/', {
@@ -52,5 +52,20 @@ const { startRecording, stopRecording } = (function () {
         startRecording: toggleRecording
     }
 })();
+
+
+function handleVoiceResponse({ result }) {
+    console.log(result);
+    getDetailedSongInfo(result.title, result.artist)
+        .then(({ song_id }) => { 
+            result.song_id = song_id
+            return result;
+        })
+        .then(r => {
+            clearTable();
+            saveFetchResult(r);
+            showModal();
+        });
+}
 
 
