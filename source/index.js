@@ -14,12 +14,6 @@ function onSupposeConfirm(event){
     finishRound();
     alertVictory();
 }
-function alertVictory(){
-    alert("Round finished (victory)");
-}
-function alertLoose(){
-    alert("Round finished (loose)");
-}
 function finishRound(){
     let currRound = localStorage.getItem("currRound");
     console.log("Starting round:" + currRound);
@@ -28,11 +22,10 @@ function finishRound(){
     localStorage.setItem("answers", JSON.stringify([]));
     localStorage.setItem("answersHistory", JSON.stringify([]));
 }
+
 function onSearchByLyrics(event) {
     event.preventDefault();
 
-
-    console.log("on Text Search");
     fetch(`https://api.audd.io/findLyrics/?q=${searchByLyricsInput.value}`, {
         method: 'POST',
         body: JSON.stringify({
@@ -54,6 +47,7 @@ function onSearchByLyrics(event) {
         console.log("------->Error");
     })
 }
+
 function showModal() {
     let answVariant = shiftAnswersArray();
     if (!answVariant) {
@@ -71,6 +65,7 @@ function clearTable(){
         resultsTableBlock.innerHTML="";
     }
 }
+
 function renderTable() {
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     // resultsTableBlock.innerHTML= "";
@@ -81,6 +76,7 @@ function renderTable() {
     console.log("Rendering Answers Table");
     console.log("----------------------");
 }
+
 function shiftAnswersArray() {
     console.log("shiftAnswersArr");
     let answersArray = JSON.parse(localStorage.getItem("answers"));
@@ -97,7 +93,8 @@ function shiftAnswersArray() {
     
     return returnAnswer;
 }
-function getPossAnswer() {
+
+function getPossibleAnswer() {
     return JSON.parse(localStorage.getItem("answers"))[0];
 }
 
@@ -219,11 +216,10 @@ function recompileAnswers() {
     console.log(newAnswersArray);
     localStorage.setItem("answers", JSON.stringify(newAnswersArray));
 }
+
 function findSimilar(arr1, arr2) {
-    console.log("ARRS:");
-    console.log(arr1);
-    console.log(arr2);
     let inter = new Array();
+    // FINDS INTERSECTION. DONT TOUCH. IT WORKS FOR SURE
     for (let i = 0; i < arr1.length; i++) {
         let tmpObj = arr1[i];
         for (let j = 0; j < arr2.length; j++) {
@@ -232,7 +228,6 @@ function findSimilar(arr1, arr2) {
             }
         }
     }
-    // let inter= arr1.filter(x => arr2.includes(x));
     console.log("INTER");
     console.log(inter);
     return inter;
