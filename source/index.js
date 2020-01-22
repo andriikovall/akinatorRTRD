@@ -2,10 +2,25 @@ const searchByLyricsButton = document.getElementById("searchByLyricsButton");
 const searchByLyricsInput = document.getElementById("searchByLyricsInput");
 const resultsTableBlock = document.getElementById("resultsTable");
 const currentResultPlayer = document.getElementById("playerContainer");
-const supposeRejectionButton = document.getElementById("supposeRejectionButton");
+const supposeRejectButton = document.getElementById("supposeRejectButton");
+const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 
 function onSupposeReject(event) {
+    console.log("suppose rejected");
     renderTable();
+}
+function onSupposeConfirm(event){
+    console.log("suppose confirmed");
+    finishRound();
+    alertVictory();
+}
+function alertVictory(){
+    alert("Round finished");
+}
+function finishRound(){
+    let currRound = localStorage.getItem("currRound");
+    localStorage.setItem("currRound", JSON.stringify(currRound + 1));
+    console.log("Starting round:" + currRound);
 }
 function onSearchByLyrics(event) {
     event.preventDefault();
@@ -39,7 +54,7 @@ function showModal() {
     }
     console.log("Answer Variant");
     console.log(answVariant);
-    openModalForSong(answVariant.deezer);
+    openModalForSong(answVariant);
 }
 // @todo
 function renderTable() {
@@ -55,7 +70,11 @@ function renderTable() {
 function shiftAnswersArray() {
     console.log("shiftAnswersArr");
     let answersArray = JSON.parse(localStorage.getItem("answers"));
+    console.log(answersArray);
+    console.log("shifted answ");
     let returnAnswer = answersArray.shift();
+    console.log(returnAnswer);
+
     localStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
@@ -127,7 +146,8 @@ function saveFetchResult(response) {
     if (currRound.length >= 5) {
         console.log("currRound.length >= 4");
         console.log("FINISHING ROUNd");
-        //TODO FINISH ROUND
+        startNewRound();
+        
     }
 }
 
@@ -176,11 +196,12 @@ function recompileAnswers() {
         console.log("Deleting rejected answers...");
         answHistory.forEach(a => {
             newAnswersArray = newAnswersArray.filter(b => {
-                b.song_id !== a.song_id;
+                return b.song_id !== a.song_id;
             })
         });
     }
-
+    console.log("newANSWERS ARRAY:");
+    console.log(newAnswersArray);
     localStorage.setItem("answers", JSON.stringify(newAnswersArray));
 }
 function findSimilar(arr1, arr2) {
@@ -203,4 +224,5 @@ function findSimilar(arr1, arr2) {
 }
 
 searchByLyricsButton.addEventListener("click", onSearchByLyrics);
-supposeRejectionButton.addEventListener("click", onSupposeReject);
+supposeRejectButton.addEventListener("click", onSupposeReject);
+supposeConfirmButton.addEventListener("click", onSupposeConfirm);
