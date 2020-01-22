@@ -15,15 +15,22 @@ function onSupposeConfirm(event){
     alertVictory();
 }
 function alertVictory(){
-    alert("Round finished");
+    alert("Round finished (victory)");
+}
+function alertLoose(){
+    alert("Round finished (loose)");
 }
 function finishRound(){
     let currRound = localStorage.getItem("currRound");
-    localStorage.setItem("currRound", JSON.stringify(currRound + 1));
     console.log("Starting round:" + currRound);
+    renderTable();
+    localStorage.setItem("currRound", JSON.stringify(1 + parseInt(currRound)));
+    localStorage.setItem("answers", JSON.stringify([]));
+    localStorage.setItem("answersHistory", JSON.stringify([]));
 }
 function onSearchByLyrics(event) {
     event.preventDefault();
+
 
     console.log("on Text Search");
     fetch(`https://api.audd.io/findLyrics/?q=${searchByLyricsInput.value}`, {
@@ -37,6 +44,7 @@ function onSearchByLyrics(event) {
     }).then(res => {
         console.log("RESPONCE");
         console.log(res);
+        clearTable();
         saveFetchResult(res);
         showModal();
 
@@ -57,6 +65,12 @@ function showModal() {
     openModalForSong(answVariant);
 }
 // @todo
+function clearTable(){
+    const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    if(!answersHistory || !answersHistory.length ){
+        resultsTableBlock.innerHTML="";
+    }
+}
 function renderTable() {
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     // resultsTableBlock.innerHTML= "";
@@ -146,7 +160,8 @@ function saveFetchResult(response) {
     if (currRound.length >= 5) {
         console.log("currRound.length >= 4");
         console.log("FINISHING ROUNd");
-        startNewRound();
+        finishRound();
+        alertLoose();
         
     }
 }
