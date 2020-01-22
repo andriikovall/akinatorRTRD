@@ -60,7 +60,15 @@ body {
     opacity: 1;
 }
 
-#btn-microphone {
+.section-result button:focus,
+.section-search button:focus {
+    box-shadow: 0 10px 0 #ff5990;
+    border-radius: 10px;
+    padding: 10px 25px;
+    transition: all 0.5s;
+}
+
+#searchByVoiceButton {
     border-radius: 50%;
 }
 
