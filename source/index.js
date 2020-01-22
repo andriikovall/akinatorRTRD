@@ -9,12 +9,14 @@ function onSupposeReject(event) {
     console.log("suppose rejected");
     renderTable();
 }
-function onSupposeConfirm(event){
+
+function onSupposeConfirm(event) {
     console.log("suppose confirmed");
     finishRound();
     alertVictory();
 }
-function finishRound(){
+
+function finishRound() {
     let currRound = localStorage.getItem("currRound");
     console.log("Starting round:" + currRound);
     renderTable();
@@ -59,10 +61,10 @@ function showModal() {
     openModalForSong(answVariant);
 }
 // @todo
-function clearTable(){
+function clearTable() {
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
-    if(!answersHistory || !answersHistory.length ){
-        resultsTableBlock.innerHTML="";
+    if (!answersHistory || !answersHistory.length) {
+        resultsTableBlock.innerHTML = "";
     }
 }
 
@@ -70,8 +72,8 @@ function renderTable() {
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     // resultsTableBlock.innerHTML= "";
     if (answersHistory) {
-            let lastAnswer = answersHistory[answersHistory.length - 1];
-            resultsTableBlock.innerHTML += `<tr song_id="${lastAnswer.song_id}"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title}</td></tr>`;
+        let lastAnswer = answersHistory[answersHistory.length - 1];
+        resultsTableBlock.innerHTML += `<tr song_id="${lastAnswer.song_id}"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title}</td></tr>`;
     }
     console.log("Rendering Answers Table");
     console.log("----------------------");
@@ -90,7 +92,7 @@ function shiftAnswersArray() {
     let answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     answersHistory.push(returnAnswer);
     localStorage.setItem("answersHistory", JSON.stringify(answersHistory));
-    
+
     return returnAnswer;
 }
 
@@ -102,7 +104,10 @@ function saveFetchResult(response) {
     // IF PLAYING FOR THE VERU FIRST TIME
     if (!localStorage.getItem("currRound") || !localStorage.getItem("rounds")) {
         localStorage.setItem("currRound", 1);
-        localStorage.setItem("rounds", JSON.stringify([[], []]));
+        localStorage.setItem("rounds", JSON.stringify([
+            [],
+            []
+        ]));
         localStorage.setItem("answers", JSON.stringify([]));
         localStorage.setItem("answersHistory", JSON.stringify([]));
 
@@ -158,8 +163,8 @@ function saveFetchResult(response) {
         console.log("currRound.length >= 4");
         console.log("FINISHING ROUNd");
         finishRound();
-        alertLoose();
-        
+        alertLose();
+
     }
 }
 
@@ -173,7 +178,13 @@ function recompileAnswers() {
     });
     console.log("All Variants:");
     console.log(allVariants);
-    let resultsMatrix = [[], [], [], [], []];
+    let resultsMatrix = [
+        [],
+        [],
+        [],
+        [],
+        []
+    ];
     let tmpIterator;
     for (let i = 0; i < allVariants.length; i++) {
         tmpIterator = 0;

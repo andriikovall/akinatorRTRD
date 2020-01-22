@@ -1,6 +1,11 @@
-function alertVictory(){
-    alert("Round finished (victory)");
+function alertVictory() {
+    $('#victoryModal').modal();
 }
-function alertLoose(){
-    alert("Round finished (loose)");
+
+function alertLose() {
+    $('#loseModal').modal();
+}
+
+function alertSongNotFound() {
+    $('#songNotFoundModal').modal();
 }
