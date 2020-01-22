@@ -1,5 +1,4 @@
 function openModalForSong({ title, artist }) {
-
     const url = new URL('https://api.deezer.com/search');
     const params = { q: `artist:"${artist}" track:"${title}"` };
     url.search = new URLSearchParams(params).toString();
