@@ -76,12 +76,22 @@ function clearTable(){
     }
 }
 
+function onSongClicked(event) {
+    event.preventDefault();
+
+    const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
+    const id = target.getAttribute('song_id');
+    
+    document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id);
+}
+
 function renderTable() {
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     // resultsTableBlock.innerHTML= "";
     if (answersHistory) {
         let lastAnswer = answersHistory[answersHistory.length - 1];
-        resultsTableBlock.innerHTML += `<tr song_id="${lastAnswer.song_id}"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title}</td></tr>`;
+        resultsTableBlock.innerHTML += 
+        `<tr song_id="${lastAnswer.song_id}" onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title}</td></tr>`;
     }
     console.log("Rendering Answers Table");
     console.log("----------------------");

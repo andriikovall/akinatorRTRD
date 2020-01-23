@@ -94,6 +94,17 @@ textarea {
     animation: shadow-pulse 1s infinite;
 }
 
+#resultsTable {
+    border-radius: 25px !important;
+}
+
+#resultsTable tr:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+    border-radius: 50%; 
+}
+
 @keyframes shadow-pulse {
     0% {
         box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.8);
