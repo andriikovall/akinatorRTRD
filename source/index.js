@@ -25,6 +25,14 @@ function finishRound() {
     localStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
+function onSearchByMicroStart(event){
+
+}
+
+function onSearchByMicroFinish(event){
+
+}
+
 function onSearchByLyrics(event) {
     event.preventDefault();
 
@@ -40,7 +48,7 @@ function onSearchByLyrics(event) {
         console.log("RESPONCE");
         console.log(res);
         clearTable();
-        saveFetchResult(res);
+        saveFetchResult(res.result);
         showModal();
 
     }).catch(x => {
@@ -60,8 +68,8 @@ function showModal() {
     console.log(answVariant);
     openModalForSong(answVariant);
 }
-// @todo
-function clearTable() {
+
+function clearTable(){
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     if (!answersHistory || !answersHistory.length) {
         resultsTableBlock.innerHTML = "";
@@ -81,7 +89,7 @@ function renderTable() {
 
 function shiftAnswersArray() {
     console.log("shiftAnswersArr");
-    let answersArray = JSON.parse(localStorage.getItem("answers"));
+    let answersArray = JSON.parse(localStorage.getItem("answers")) || [];
     console.log(answersArray);
     console.log("shifted answ");
     let returnAnswer = answersArray.shift();
@@ -132,7 +140,7 @@ function saveFetchResult(response) {
     }
     // console.log(currRound);
 
-    currRound.push(response.result);
+    currRound.push(response);
 
     localStorage.setItem("rounds", JSON.stringify(rounds));
 
@@ -145,10 +153,10 @@ function saveFetchResult(response) {
             recompileAnswers();
         } else {
             console.log("answers set to default");
-            localStorage.setItem("answers", JSON.stringify(response.result));
+            localStorage.setItem("answers", JSON.stringify(response));
         }
     } else {
-        answerArray = findSimilar(answerArray, response.result);
+        answerArray = findSimilar(answerArray, response);
         if (!answerArray.length) {
             console.log("RECOMPILE>>>");
             recompileAnswers();

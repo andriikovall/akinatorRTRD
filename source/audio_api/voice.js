@@ -1,4 +1,4 @@
-const { startRecording, stopRecording } = (function () {
+const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
     let recorder, gumStream;
 
     function toggleRecording(cb) {
@@ -22,7 +22,7 @@ const { startRecording, stopRecording } = (function () {
     function makeRequest(fileData, cb) {
         const formData = createFormDataFromObj({
             api_token: audApiToken, 
-            return: 'apple_music,deezer,spotify',
+            return: 'deezer',
             file: fileData
         });
         fetch('https://api.audd.io/', {
@@ -44,13 +44,35 @@ const { startRecording, stopRecording } = (function () {
         return formData;
     }
 
+        function stopRecording(cb) {
+            toggleRecording(fileData => makeRequest(fileData, cb));
+        }
 
     return {
-        stopRecording: (cb) => {
-            toggleRecording(fileData => makeRequest(fileData, cb));   
-        },
-        startRecording: toggleRecording
+        onSearchByVoiceStart: toggleRecording,
+        onSearchByVoiceEnd: () => stopRecording(handleVoiceResponse)
     }
 })();
 
 
+function handleVoiceResponse({ result }) {
+    console.log('result:', result);
+    if (!result) {
+        //handle somehow VOVA
+    }
+    result.song_id = result.deezer.id;
+    clearTable();
+    saveFetchResult([result]);
+    showModal();
+    // getDetailedSongInfo(result.title, result.artist)
+    // .then((res) => { 
+    //         result.song_id = res.id;
+    //         console.log('result:', result);
+    //         return result;
+    //     })
+    // .then(r => {
+    //     clearTable();
+    //     saveFetchResult(r);
+    //     showModal();
+    // });
+}
