@@ -56,18 +56,23 @@ const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
 
 
 function handleVoiceResponse({ result }) {
+    console.log('result:', result);
     if (!result) {
-        //handle somehow
+        //handle somehow VOVA
     }
-    getDetailedSongInfo(result.title, result.artist)
-    .then(({ id }) => { 
-            console.log(id);
-            result.song_id = id;
-            return result;
-        })
-        .then(r => {
-            clearTable();
-            saveFetchResult(r);
-            showModal();
-        });
+    result.song_id = result.deezer.id;
+    clearTable();
+    saveFetchResult([result]);
+    showModal();
+    // getDetailedSongInfo(result.title, result.artist)
+    // .then((res) => { 
+    //         result.song_id = res.id;
+    //         console.log('result:', result);
+    //         return result;
+    //     })
+    // .then(r => {
+    //     clearTable();
+    //     saveFetchResult(r);
+    //     showModal();
+    // });
 }

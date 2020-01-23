@@ -1,16 +1,23 @@
-function openModalForSong({ title, artistName,  }) {
-        getDetailedSongInfo(title, artistName) 
-            .then(x=>{
+function openModalForSong(song) {
+    if (song.deezer && song.deezer.id && song.deezer.link) {
+        song.id = song.deezer.id;
+        song.link = song.deezer.link;
+        song.artist = song.deezer.artist; // бля пизда. АПИ АУДД.ио пизда ебаная
+        openModal(song);
+    } else {
+        getDetailedSongInfo(song.title, song.artist)
+            .then(x => {
                 console.log("AFTER THEN");
                 console.log(x);
-                openModal
+                openModal(x);
             });
+    }
 
     function openModal({ title, artist: { name }, id, link }) {
         if (arguments[0] == null) {
             //todo smth with null song
         }
-        $('#resultModal').modal({backdrop: 'static',keyboard: false}); // hardcoded modal id
+        $('#resultModal').modal({ backdrop: 'static', keyboard: false }); // hardcoded modal id
         $('.modal-body #player').html(createSongPlayerByDeezId(id));
         $('#title').html(title || '--');
         $('#author').html(name || '--');
