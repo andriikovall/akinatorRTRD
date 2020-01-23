@@ -196,3 +196,21 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade  bd-example-modal-sm recording-modal" id="recordingModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border: none;">
+                <h5 class="modal-title" id="recordingModalLabel">Recording...</h5>
+            </div>
+            <div id="recording-btn" class="modal-body px-2 text-center" style="height: 168px;" style="border: none;">
+                <button class="btn recording-btn" onclick="alertStopRecording()" id="searchByVoiceButton"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div id="recordingModalFooter" class="modal-footer" style="display: none;">
+                <div class="container mx-auto text-center mb-0 pb-0">
+                    <button type="button" class="pink-btn" onclick="toDefault()" data-dismiss="modal" id="supposeConfirmButton">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

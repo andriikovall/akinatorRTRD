@@ -24,7 +24,6 @@ body {
 
 .table {
     background: rgba(0, 0, 0, 0);
-
 }
 
 .player {
@@ -42,7 +41,6 @@ body {
     margin-bottom: 25px;
     font-weight: 600;
     font-size: 1.5em;
-
     box-shadow: 0 10px 0 #ff5990;
     border-radius: 10px;
     padding: 10px 25px;
@@ -86,8 +84,29 @@ textarea {
     color: #fff;
 }
 
+.recording-btn {
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background: #f42267;
+    font-size: 40px;
+    animation: shadow-pulse 1s infinite;
+}
+
+@keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+    }
+}
+
+
 /* medium */
-@media only screen and (max-width : 992px) {
+
+@media only screen and (max-width: 992px) {
     .section-result,
     .section-search,
     .alertbox {
@@ -106,8 +125,10 @@ textarea {
     } */
 }
 
+
 /* small */
-@media only screen and (max-width : 768px) {
+
+@media only screen and (max-width: 768px) {
     .section-result,
     .section-search,
     .alertbox {
@@ -117,7 +138,7 @@ textarea {
     }
 }
 
-@media only screen and (max-width : 580px) {
+@media only screen and (max-width: 580px) {
     /* Сделал все через класы бутстрапа в html */
     /* .player {
         width: 40vw;
@@ -132,7 +153,9 @@ textarea {
     } */
 }
 
+
 /* extra small */
-@media only screen and (max-width : 480px) {
-   /* Точно так же сделал через класы */
+
+@media only screen and (max-width: 480px) {
+    /* Точно так же сделал через класы */
 }
