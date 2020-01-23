@@ -58,7 +58,7 @@ function showModal() {
     console.log(answVariant);
     openModalForSong(answVariant);
 }
-// @todo
+
 function clearTable(){
     const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
     if(!answersHistory || !answersHistory.length ){
