@@ -1,4 +1,4 @@
-const { startRecording, stopRecording } = (function () {
+const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
     let recorder, gumStream;
 
     function toggleRecording(cb) {
@@ -44,18 +44,22 @@ const { startRecording, stopRecording } = (function () {
         return formData;
     }
 
+        function stopRecording(cb) {
+            toggleRecording(fileData => makeRequest(fileData, cb));
+        }
 
     return {
-        stopRecording: (cb) => {
-            toggleRecording(fileData => makeRequest(fileData, cb));   
-        },
-        startRecording: toggleRecording
+        onSearchByVoiceStart: toggleRecording,
+        onSearchByVoiceEnd: () => stopRecording(handleVoiceResponse)
     }
 })();
 
 
 function handleVoiceResponse({ result }) {
     console.log(result);
+    if (!result) {
+        //handle somehow
+    }
     getDetailedSongInfo(result.title, result.artist)
         .then(({ song_id }) => { 
             result.song_id = song_id

@@ -236,3 +236,5 @@ function findSimilar(arr1, arr2) {
 searchByLyricsButton.addEventListener("click", onSearchByLyrics);
 supposeRejectButton.addEventListener("click", onSupposeReject);
 supposeConfirmButton.addEventListener("click", onSupposeConfirm);
+
+
