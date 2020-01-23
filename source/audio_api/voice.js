@@ -56,13 +56,13 @@ const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
 
 
 function handleVoiceResponse({ result }) {
-    console.log(result);
     if (!result) {
         //handle somehow
     }
     getDetailedSongInfo(result.title, result.artist)
-        .then(({ song_id }) => { 
-            result.song_id = song_id
+    .then(({ id }) => { 
+            console.log(id);
+            result.song_id = id;
             return result;
         })
         .then(r => {
@@ -71,5 +71,3 @@ function handleVoiceResponse({ result }) {
             showModal();
         });
 }
-
-

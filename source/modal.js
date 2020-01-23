@@ -1,10 +1,10 @@
-function openModalForSong({ title, artistName, deezer: { id, link } }) {
-    if (id && link) {
-        openModal({ title, artist: { name: artistName }, id, link });
-    } else {
+function openModalForSong({ title, artistName,  }) {
         getDetailedSongInfo(title, artistName) 
-            .then(openModal);
-    }
+            .then(x=>{
+                console.log("AFTER THEN");
+                console.log(x);
+                openModal
+            });
 
     function openModal({ title, artist: { name }, id, link }) {
         if (arguments[0] == null) {
@@ -21,10 +21,17 @@ function openModalForSong({ title, artistName, deezer: { id, link } }) {
 
 
 function getDetailedSongInfo(title, artistName) {
-    const url = new URL('https://api.deezer.com/search');
-    const params = { q: `artist:"${artistName}" track:"${title}"` };
+    const url = new URL('https://deezerdevs-deezer.p.rapidapi.com/search');
+    const params = {
+        q: `artist:"${artistName}" track:"${title}"`
+    };
     url.search = new URLSearchParams(params).toString();
-    return fetch(url)
+    return fetch(url, {
+        headers: {
+            'x-rapidapi-host': "deezerdevs-deezer.p.rapidapi.com",
+            'x-rapidapi-key': "0ee7afc8d1mshd9501b1c8aabc51p14888fjsn7a2b7463f5d2"
+        }
+    })
         .then(r => r.json())
         .then(({ data }) => data[0] || null);
 }

@@ -23,6 +23,14 @@ function finishRound(){
     localStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
+function onSearchByMicroStart(event){
+
+}
+
+function onSearchByMicroFinish(event){
+
+}
+
 function onSearchByLyrics(event) {
     event.preventDefault();
 
@@ -236,5 +244,3 @@ function findSimilar(arr1, arr2) {
 searchByLyricsButton.addEventListener("click", onSearchByLyrics);
 supposeRejectButton.addEventListener("click", onSupposeReject);
 supposeConfirmButton.addEventListener("click", onSupposeConfirm);
-
-
