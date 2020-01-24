@@ -1,0 +1,70 @@
+:root {
+    --pink: #f42267;
+    --pink-shadow: #ff5990;
+    --pink-warn: #660c62;
+    --pink-warn-shadow: #be23b7;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+span,
+table,
+.modal-content {
+    color: #fff !important;
+}
+
+a {
+    color: var(--pink-shadow);
+}
+
+a:hover {
+    color: var(--pink);
+}
+
+.modal-content {
+    border-radius: 25px;
+}
+
+.modal-header {
+    border-bottom: 2px solid rgb(82, 65, 65);
+}
+
+.modal-footer {
+    border-top: 2px solid rgb(82, 65, 65);
+}
+
+table {
+    font-size: 0.8em;
+}
+
+.pink-btn {
+    background: var(--pink);
+    color: #fff;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1.2em;
+    box-shadow: 0 10px 0 var(--pink-shadow);
+    border-radius: 10px;
+    padding: 5px 20px;
+    transition: all 0.5s;
+    opacity: 0.7;
+    border: none;
+}
+
+.pink-btn:hover {
+    box-shadow: 0 3px 0 var(--pink-shadow);
+    border-radius: 10px;
+    transition: all 0.5s;
+    opacity: 1;
+}
+
+.pink-btn-warn {
+    background: var(--pink-warn);
+    box-shadow: 0 10px 0 var(--pink-warn-shadow);
+}
+
+.pink-btn-warn:hover {
+    box-shadow: 0 3px 0 var(--pink-warn-shadow);
+}

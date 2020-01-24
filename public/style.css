@@ -1,0 +1,184 @@
+body {
+    background: url(./images/bg.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    position: relative;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.section-result,
+.section-search,
+.alertbox {
+    color: #fff;
+    font-weight: 600;
+    margin-top: 30px;
+    border-radius: 25px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.table {
+    background: rgba(0, 0, 0, 0);
+}
+
+.player {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    width: 250px;
+}
+
+.readme {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    width: 250px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+.section-result button,
+.section-search button {
+    background: #f42267;
+    color: #fff;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1.5em;
+    box-shadow: 0 10px 0 #ff5990;
+    border-radius: 10px;
+    padding: 10px 25px;
+    transition: all 0.5s;
+    opacity: 0.7;
+}
+
+.section-result button:hover,
+.section-search button:hover {
+    /* чисто отсебятина */
+    color: rgb(219, 218, 218);
+    /*  */
+    box-shadow: 0 3px 0 #ff5990;
+    transition: all 0.5s;
+    opacity: 1;
+}
+
+.section-result button:focus,
+.section-search button:focus {
+    box-shadow: 0 10px 0 #ff5990;
+    border-radius: 10px;
+    padding: 10px 25px;
+    transition: all 0.5s;
+}
+
+#searchByVoiceButton {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.counter {
+    margin: 15px;
+    width: 60px;
+    border-radius: 7px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+textarea {
+    background: rgba(0, 0, 0, 0.9);
+    background: transparent;
+    color: #fff;
+}
+
+.recording-btn {
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background: #f42267;
+    font-size: 40px;
+    animation: shadow-pulse 1s infinite;
+}
+
+#resultsTable {
+    border-radius: 25px !important;
+}
+
+#resultsTable tr:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+    border-radius: 50%;
+}
+
+@keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+    }
+}
+
+
+/* medium */
+
+@media only screen and (max-width: 992px) {
+    .section-result,
+    .section-search,
+    .alertbox {
+        margin-top: 1.2em;
+        border-radius: 15px;
+        padding: 10px;
+    }
+    /* не нужно, и так нормально работает, но оставлю пока */
+    /* .first-column,
+    .second-column {
+        height: 45vh;
+    }
+
+    textarea.form-control {
+        height: 20vh;
+    } */
+}
+
+
+/* small */
+
+@media only screen and (max-width: 768px) {
+    .section-result,
+    .section-search,
+    .alertbox {
+        margin-top: 1em;
+        border-radius: 15px;
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    /* Сделал все через класы бутстрапа в html */
+    /* .player {
+        width: 40vw;
+        height: 30vh;
+        margin-bottom: 0;
+    }
+
+    .table {
+        width: 45vw;
+        height :30vh;
+        margin-bottom: 0;
+    } */
+}
+
+
+/* extra small */
+
+@media only screen and (max-width: 480px) {
+    /* Точно так же сделал через класы */
+}
