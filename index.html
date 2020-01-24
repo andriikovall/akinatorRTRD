@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
     <link rel="stylesheet" href="./public/modal-style.css">
@@ -17,15 +16,9 @@
     <!-- JQ -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
     <!-- My scripts -->
@@ -45,8 +38,7 @@
         Ну запусти меня
     </button>
 </div> -->
-<div class="modal fade  bd-example-modal-sm" id="resultModal" tabindex="-1" role="dialog"
-    aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal fade  bd-example-modal-sm" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,12 +71,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <button type="button" class="pink-btn" data-dismiss="modal"
-                                id="supposeConfirmButton">Yes</button>
+                            <button type="button" class="pink-btn" data-dismiss="modal" id="supposeConfirmButton">Yes</button>
                         </div>
                         <div class="col text-right">
-                            <button type="button" class="pink-btn pink-btn-warn" data-dismiss="modal"
-                                id="supposeRejectButton">No</button>
+                            <button type="button" class="pink-btn pink-btn-warn" data-dismiss="modal" id="supposeRejectButton">No</button>
                         </div>
                     </div>
                 </div>
@@ -115,8 +105,7 @@
                             <div class="col-md-6 col-lg-7 col-xl-6 col-sm-12 text-center">
                                 <div class="player mx-auto">
                                     <div id="playerContainer">
-                                        <iframe scrolling="no" frameborder="0" allowTransparency="true" id="${id}"
-                                            src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=ff0000&layout=dark&size=medium&type=tracks&id=569376&app_id=1"
+                                        <iframe scrolling="no" frameborder="0" allowTransparency="true" id="${id}" src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=ff0000&layout=dark&size=medium&type=tracks&id=569376&app_id=1"
                                             width="230" height="230"></iframe>
                                         <!-- 230 - значение для дефолтной страницы. 270 для модалки, дефолтное значение функции 270 -->
                                     </div>
@@ -153,12 +142,11 @@
 
 </html>
 
-<div class="modal fade  bd-example-modal-sm" id="victoryModal" tabindex="-1" role="dialog"
-    aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal fade  bd-example-modal-sm" id="victoryModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="searchModalLabel">Congratulation! You won!</h5>
+                <h5 class="modal-title" id="searchModalLabel">You overcome akinator!</h5>
             </div>
             <div class="modal-body px-2">
                 <img src="https://i.gifer.com/4NWG.gif" alt="victory gif">
@@ -173,16 +161,14 @@
     </div>
 </div>
 
-<div class="modal fade  bd-example-modal-sm" id="loseModal" tabindex="-1" role="dialog"
-    aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal fade  bd-example-modal-sm" id="loseModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="searchModalLabel">It`s a pity, you lose</h5>
+                <h6 class="modal-title" id="searchModalLabel">Akinator was stronger, you lose</h6>
             </div>
             <div class="modal-body px-2">
-                <img src="https://memestatic.fjcdn.com/gifs/Real+sad+cat+hours_5d98ca_7169732.gif" style="width: 100%;"
-                    alt="lose gif">
+                <img src="https://media.tenor.com/images/dac79996006d7dd97e7097c2662bab74/tenor.gif" style="width: 100%;" alt="lose gif">
 
             </div>
             <div class="modal-footer ">
@@ -194,8 +180,7 @@
     </div>
 </div>
 
-<div class="modal fade  bd-example-modal-sm" id="songNotFoundModal" tabindex="-1" role="dialog"
-    aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal fade  bd-example-modal-sm" id="songNotFoundModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content text-center" style="padding: 8px;">
 
@@ -209,8 +194,7 @@
     </div>
 </div>
 
-<div class="modal fade  bd-example-modal-sm recording-modal" id="recordingModal" tabindex="-1" role="dialog"
-    aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal fade  bd-example-modal-sm recording-modal" id="recordingModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border: none;">
@@ -222,8 +206,7 @@
             </div>
             <div id="recordingModalFooter" class="modal-footer" style="display: none;">
                 <div class="container mx-auto text-center mb-0 pb-0">
-                    <button type="button" class="pink-btn" onclick="setTimeout(() => toDefault(), 1000)"
-                        data-dismiss="modal" id="supposeConfirmButton">Ok</button>
+                    <button type="button" class="pink-btn" onclick="setTimeout(() => toDefault(), 1000)" data-dismiss="modal" id="supposeConfirmButton">Ok</button>
                 </div>
             </div>
         </div>
