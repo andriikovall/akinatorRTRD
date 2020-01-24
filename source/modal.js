@@ -20,23 +20,27 @@ function openModalForSong(song) {
     }
 
     function openModal({ title, artist: { name }, id, link }) {
+        console.log('OPEN MODAL');
+        console.log(arguments[0]);
         if (arguments[0] == null) {
             //todo smth with null song
         }
         $('#resultModal').modal({ backdrop: 'static', keyboard: false }); // hardcoded modal id
         $('.modal-body #player').html(createSongPlayerByDeezId(id));
         $('#title').html(title || '--');
-        $('#author').html(name || '--');
+        $('#author').html(artist || name || '--');
         $('#link').attr("href", link);
         // todo more fields probably
     }
-    function openModalWithoutPlayer({ title, artist: { name }}) {
+    function openModalWithoutPlayer({ title, artist }) {
         if (arguments[0] == null) {
             //todo smth with null song
         }
+        console.log('openModalWithoutPlayer');
+        console.log(arguments[0]);
         $('#resultModal').modal({ backdrop: 'static', keyboard: false }); // hardcoded modal id
         $('#title').html(title || '--');
-        $('#author').html(name || '--');
+        $('#author').html(artist || '--');
     }
 }
 
