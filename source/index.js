@@ -7,6 +7,11 @@ const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 
 function onSupposeReject(event) {
     console.log("suppose rejected");
+    const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
+
+    if(answersHistory.length >= 5){
+        alertVictory();
+    }
     renderTable();
 }
 
@@ -23,14 +28,6 @@ function finishRound() {
     sessionStorage.setItem("currRound", JSON.stringify(1 + parseInt(currRound)));
     sessionStorage.setItem("answers", JSON.stringify([]));
     sessionStorage.setItem("answersHistory", JSON.stringify([]));
-}
-
-function onSearchByMicroStart(event) {
-    // я уже сделал похожые функции, так что нету смысла реализововать
-}
-
-function onSearchByMicroFinish(event) {
-
 }
 
 function onSearchByLyrics(event) {
@@ -59,13 +56,9 @@ function onSearchByLyrics(event) {
         console.log("RESPONCE");
         console.log(res);
         clearTable();
-        if(saveFetchResult(res.result)){
-            showModal();
-        }else {
-            console.log("FINISHING game in Event handler");
-            finishRound();
-            alertVictory();
-        }
+        saveFetchResult(res.result);
+        showModal();
+        
     }).then(res2=>{
         searchByLyricsButton.innerHTML = 'Search by text';
         searchByLyricsButton.disabled = false;
@@ -204,13 +197,12 @@ function saveFetchResult(response) {
             sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
-
-    if (currRound.length >= 5) {
-        console.log("currRound.length > 4");
-        console.log("FINISHING ROUNd");
-        return false;
-    }
-    return true;
+    // if (currRound.length >= 5) {
+    //     console.log("currRound.length > 4");
+    //     console.log("FINISHING ROUNd");
+    //     return false;
+    // }
+    // return true;
 }
 
 function recompileAnswers() {
