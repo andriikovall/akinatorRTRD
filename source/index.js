@@ -7,11 +7,6 @@ const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 
 function onSupposeReject(event) {
     console.log("suppose rejected");
-    const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-
-    if(answersHistory.length >= 5){
-        alertVictory();
-    }
     renderTable();
 }
 
@@ -30,11 +25,19 @@ function finishRound() {
     sessionStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
+function onSearchByMicroStart(event) {
+    // я уже сделал похожые функции, так что нету смысла реализововать
+}
+
+function onSearchByMicroFinish(event) {
+
+}
+
 function onSearchByLyrics(event) {
     event.preventDefault();
 
-    searchByLyricsButton.innerHTML = 
-    `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    searchByLyricsButton.innerHTML =
+        `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only">Searching...</span>
     </div>`;
     searchByLyricsButton.disabled = true;
@@ -56,10 +59,14 @@ function onSearchByLyrics(event) {
         console.log("RESPONCE");
         console.log(res);
         clearTable();
-        saveFetchResult(res.result);
-        showModal();
-        
-    }).then(res2=>{
+        if (saveFetchResult(res.result)) {
+            showModal();
+        } else {
+            console.log("FINISHING game in Event handler");
+            finishRound();
+            alertVictory();
+        }
+    }).then(res2 => {
         searchByLyricsButton.innerHTML = 'Search by text';
         searchByLyricsButton.disabled = false;
     }).catch(x => {
@@ -74,8 +81,9 @@ function showModal() {
     if (!answVariant) {
         console.log("!answVariant");
         //TODO CASE NO ANSWERS
+        return;
     }
-    
+
     console.log("Answer Variant");
     console.log(answVariant);
     openModalForSong(answVariant);
@@ -92,7 +100,10 @@ function onSongClicked(event) {
     event.preventDefault();
 
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
+
     const id = target.getAttribute('song_id');
+    console.log('ssssaaaassss')
+    console.log(id)
 
     document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
 }
@@ -102,10 +113,9 @@ function renderTable() {
     // resultsTableBlock.innerHTML= "";
 
     let check = answersHistory.every(elem => !elem);
-    if (check){
+    if (check) {
         console.log("Empty Answer History!");
-    }
-    else  {
+    } else {
         let lastAnswer = answersHistory[answersHistory.length - 1];
         resultsTableBlock.innerHTML +=
             `<tr song_id="${lastAnswer.song_id}" onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title || lastAnswer.title}</td></tr>`;
@@ -125,8 +135,7 @@ function shiftAnswersArray() {
     sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-
-    if(answersHistory.every(elem=>!elem) && !returnAnswer ){
+    if (!answersHistory) {
         console.log("Answers History is Empty");
         return null;
     }
@@ -197,12 +206,13 @@ function saveFetchResult(response) {
             sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
-    // if (currRound.length >= 5) {
-    //     console.log("currRound.length > 4");
-    //     console.log("FINISHING ROUNd");
-    //     return false;
-    // }
-    // return true;
+
+    if (currRound.length >= 5) {
+        console.log("currRound.length > 4");
+        console.log("FINISHING ROUNd");
+        return false;
+    }
+    return true;
 }
 
 function recompileAnswers() {

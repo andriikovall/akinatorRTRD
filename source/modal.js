@@ -9,7 +9,7 @@ function openModalForSong(song) {
     if (song.deezer && song.deezer.id && song.deezer.link) {
         song.id = song.deezer.id;
         song.link = song.deezer.link;
-        song.artist = song.deezer.artist; 
+        song.artist = song.deezer.artist;
         openModal(song);
     } else {
         getDetailedSongInfo(song.title, song.artist)
@@ -35,6 +35,7 @@ function openModalForSong(song) {
         $('#link').attr("href", link);
         // todo more fields probably
     }
+
     function openModalWithoutPlayer({ title, artist }) {
         if (arguments[0] == null) {
             //todo smth with null song
@@ -55,11 +56,11 @@ function getDetailedSongInfo(title, artistName) {
     };
     url.search = new URLSearchParams(params).toString();
     return fetch(url, {
-        headers: {
-            'x-rapidapi-host': "deezerdevs-deezer.p.rapidapi.com",
-            'x-rapidapi-key': "0ee7afc8d1mshd9501b1c8aabc51p14888fjsn7a2b7463f5d2"
-        }
-    })
+            headers: {
+                'x-rapidapi-host': "deezerdevs-deezer.p.rapidapi.com",
+                'x-rapidapi-key': "0ee7afc8d1mshd9501b1c8aabc51p14888fjsn7a2b7463f5d2"
+            }
+        })
         .then(r => r.json())
         .then(({ data }) => data[0] || null);
 }

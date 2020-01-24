@@ -84,9 +84,9 @@
         <div class="row">
             <div class="col-md-12 col-lg-7 col-sm-12 col-xl-7 first-column">
                 <div class="section-result mx-auto">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-5 col-xl-6 col-sm-12">
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="col-md-6 col-lg-5 col-xl-6 col-sm-12 ">
                                 <table class="table table-striped table-borderless table-dark ">
                                     <tbody id="resultsTable">
                                         <!-- <tr>
@@ -97,12 +97,18 @@
                                 </table>
                             </div>
                             <div class="col-md-6 col-lg-7 col-xl-6 col-sm-12 text-center">
-                                <div class="player mx-auto">
+                                <div class="player mx-auto" style="display: none;">
                                     <div id="playerContainer">
                                         <iframe scrolling="no" frameborder="0" allowTransparency="true" id="${id}" src="https://www.deezer.com/plugins/player?format=square&autoplay=false&playlist=false&width=300&height=300&color=ff0000&layout=dark&size=medium&type=tracks&id=569376&app_id=1"
                                             width="230" height="230"></iframe>
                                         <!-- 230 - значение для дефолтной страницы. 270 для модалки, дефолтное значение функции 270 -->
                                     </div>
+                                </div>
+                                <div class="readme text-center">
+                                    <p class="text-left">
+                                        Hello. I'm aMuseMe. Play agaist me in two game modes! Choose microphone to search for songs by audio or text to choose by lyrics. If I fails 5 times you win, otherwise celebrate the domination! You can change mode in any time but loose the proggress.
+                                        Good luck!
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -257,6 +263,12 @@
             <div class="modal-header" style="border: none;">
                 <h5 class="modal-title" id="recordingModalLabel">Choose your gamemode</h5>
             </div>
+
+            <p class="text-left" style="margin: 0 15px;">
+                Hello. I'm aMuseMe. Play agaist me in two game modes! Choose microphone to search for songs by audio or text to choose by lyrics. If I fails 5 times you win, otherwise celebrate the domination! You can change mode in any time but loose the proggress.
+                Good luck!
+            </p>
+
             <div class="modal-footer">
                 <div class="container">
                     <div class="row">
