@@ -7,12 +7,14 @@ const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 
 function onSupposeReject(event) {
     console.log("suppose rejected");
+
     const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
 
     if(answersHistory.length >= 5){
         alertVictory();
         finishRound();
     }
+
     renderTable();
 }
 
@@ -31,11 +33,19 @@ function finishRound() {
     sessionStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
+function onSearchByMicroStart(event) {
+    // я уже сделал похожые функции, так что нету смысла реализововать
+}
+
+function onSearchByMicroFinish(event) {
+
+}
+
 function onSearchByLyrics(event) {
     event.preventDefault();
 
-    searchByLyricsButton.innerHTML = 
-    `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    searchByLyricsButton.innerHTML =
+        `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only">Searching...</span>
     </div>`;
     searchByLyricsButton.disabled = true;
@@ -75,8 +85,9 @@ function showModal() {
     if (!answVariant) {
         console.log("!answVariant");
         //TODO CASE NO ANSWERS
+        return;
     }
-    
+
     console.log("Answer Variant");
     console.log(answVariant);
     openModalForSong(answVariant);
@@ -103,6 +114,7 @@ function onSongClicked(event) {
     event.preventDefault();
 
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
+
     const id = target.getAttribute('song_id');
     if(id != 0){
         document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
@@ -111,6 +123,7 @@ function onSongClicked(event) {
         console.log("SOng doesnt has a player");
         // TOAST CASE NO PLAYER REQUIRED 
     }
+
 }
 
 function renderTable() {
@@ -118,9 +131,11 @@ function renderTable() {
     // resultsTableBlock.innerHTML= "";
 
     let check = answersHistory.every(elem => !elem);
-    if (check){
+    if (check) {
         console.log("Empty Answer History!");
+
     } else  {
+
         let lastAnswer = answersHistory[answersHistory.length - 1];
         console.log("renderTable -> lastanswer");
         console.log(lastAnswer);
@@ -144,8 +159,7 @@ function shiftAnswersArray() {
     sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-
-    if(answersHistory.every(elem=>!elem) && !returnAnswer ){
+    if (!answersHistory) {
         console.log("Answers History is Empty");
         return null;
     }
@@ -221,7 +235,6 @@ function saveFetchResult(response) {
             sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
-    
 }
 
 function recompileAnswers() {

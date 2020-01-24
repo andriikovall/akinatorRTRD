@@ -55,6 +55,7 @@ function openModalForSong(song) {
         artist,
         full_title
     }) {
+
         if (arguments[0] == null) {
             //todo smth with null song
         }

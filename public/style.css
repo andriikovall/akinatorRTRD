@@ -34,6 +34,16 @@ body {
     width: 250px;
 }
 
+.readme {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+    width: 250px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
 .section-result button,
 .section-search button {
     background: #f42267;
