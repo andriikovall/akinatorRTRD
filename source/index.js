@@ -41,7 +41,6 @@ function onSearchByLyrics(event) {
         q: `${searchByLyricsInput.value}`
     };
     url.search = new URLSearchParams(params).toString();
-    console.log(url);
     fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -97,7 +96,7 @@ function renderTable() {
     if (answersHistory) {
         let lastAnswer = answersHistory[answersHistory.length - 1];
         resultsTableBlock.innerHTML +=
-            `<tr song_id="${lastAnswer.song_id}" onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title}</td></tr>`;
+            `<tr song_id="${lastAnswer.song_id}" onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title || lastAnswer.title}</td></tr>`;
     }
     console.log("Rendering Answers Table");
     console.log("----------------------");

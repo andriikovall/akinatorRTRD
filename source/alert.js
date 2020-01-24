@@ -13,6 +13,7 @@ function alertSongNotFound() {
 function alertStartRecording() {
     try {
         onSearchByVoiceStart();
+        $('#recordingModalLabel').html('Recording...');
         $('#recordingModal').modal();
     } catch {
         //
@@ -57,11 +58,11 @@ function changeGamemode() {
     } else if (sessionStorage.getItem('mode') === 'text') {
         gmSound();  
     }
-    let currRoundIndex = sessionStorage.getItem("currRound");
-    let rounds = JSON.parse(sessionStorage.getItem("rounds"));
+    clearTable();
+    const currRoundIndex = sessionStorage.getItem("currRound");
+    const rounds = JSON.parse(sessionStorage.getItem("rounds"));
     rounds[currRoundIndex] = [];
     sessionStorage.setItem("rounds", JSON.stringify(rounds));
-
 }
 
 $('#choosingModal').modal({ backdrop: 'static' });
