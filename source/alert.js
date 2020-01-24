@@ -1,5 +1,6 @@
 function alertVictory() {
     $('#victoryModal').modal();
+    setTimeout(() => $('#songNotFoundModal').modal('toggle'), 1000);
 }
 
 function alertLose() {
@@ -59,10 +60,13 @@ function changeGamemode() {
         gmSound();  
     }
     clearTable();
-    const currRoundIndex = sessionStorage.getItem("currRound");
-    const rounds = JSON.parse(sessionStorage.getItem("rounds"));
+    const currRoundIndex = parseInt(sessionStorage.getItem('currRound'));
+    const rounds = JSON.parse(sessionStorage.getItem('rounds'));
     rounds[currRoundIndex] = [];
-    sessionStorage.setItem("rounds", JSON.stringify(rounds));
+    sessionStorage.setItem('rounds', JSON.stringify(rounds));
+    const answersHistory = JSON.parse(sessionStorage.getItem('answersHistory'));
+    answersHistory.length = 0;
+    sessionStorage.setItem('answersHistory', answersHistory);
 }
 
 $('#choosingModal').modal({ backdrop: 'static' });
