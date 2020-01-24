@@ -36,7 +36,13 @@ function onSearchByMicroFinish(event) {
 function onSearchByLyrics(event) {
     event.preventDefault();
 
-    fetch(`https://api.audd.io/findLyrics/?q=${searchByLyricsInput.value}`, {
+    const url = new URL('https://api.audd.io/findLyrics/');
+    const params = {
+        q: `${searchByLyricsInput.value}`
+    };
+    url.search = new URLSearchParams(params).toString();
+    console.log(url);
+    fetch(url, {
         method: 'POST',
         body: JSON.stringify({
             return: 'timecode,apple_music,deezer,spotify',
