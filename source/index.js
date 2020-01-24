@@ -81,7 +81,6 @@ function showModal() {
     if (!answVariant) {
         console.log("!answVariant");
         //TODO CASE NO ANSWERS
-        return;
     }
     
     console.log("Answer Variant");
@@ -133,7 +132,8 @@ function shiftAnswersArray() {
     sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-    if(!answersHistory){
+
+    if(answersHistory.every(elem=>!elem) && !returnAnswer ){
         console.log("Answers History is Empty");
         return null;
     }
