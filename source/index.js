@@ -36,6 +36,12 @@ function onSearchByMicroFinish(event) {
 function onSearchByLyrics(event) {
     event.preventDefault();
 
+    searchByLyricsButton.innerHTML = 
+    `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Searching...</span>
+    </div>`;
+    searchByLyricsButton.disabled = true;
+
     const url = new URL('https://api.audd.io/findLyrics/');
     const params = {
         q: `${searchByLyricsInput.value}`
@@ -55,7 +61,8 @@ function onSearchByLyrics(event) {
         clearTable();
         saveFetchResult(res.result);
         showModal();
-
+        searchByLyricsButton.innerHTML = 'Search by text';
+        searchByLyricsButton.disabled = false;
     }).catch(x => {
         console.log("Error------->");
         console.log(x);
