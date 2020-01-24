@@ -41,14 +41,14 @@ function toDefault() {
 
 function gmSound() {
     sessionStorage.setItem('mode', 'sound');
-    // document.getElementById('searchByLyricsButton').style.display = 'none';
+    document.getElementById('searchByLyricsButton').style.display = 'none';
     document.getElementById('textBlock').style.display = 'none';
     document.getElementById('soundBlock').style.display = 'inline-block';
 }
 
 function gmText() {
     sessionStorage.setItem('mode', 'text');
-    // document.getElementById('searchByLyricsButton').style.display = 'block';
+    document.getElementById('searchByLyricsButton').style.display = 'block';
     document.getElementById('textBlock').style.display = 'inline-block';
     document.getElementById('soundBlock').style.display = 'none';
 }
