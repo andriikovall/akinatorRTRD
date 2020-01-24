@@ -12,7 +12,7 @@ function openModalForSong(song) {
         getDetailedSongInfo(song.title, song.artist)
             .then(x => {
                 if (!x) {
-                    alertSongNotFound();
+                    openModalWithoutPlayer(song);
                 } else {
                     openModal(x);
                 }
@@ -29,6 +29,14 @@ function openModalForSong(song) {
         $('#author').html(name || '--');
         $('#link').attr("href", link);
         // todo more fields probably
+    }
+    function openModalWithoutPlayer({ title, artist: { name }}) {
+        if (arguments[0] == null) {
+            //todo smth with null song
+        }
+        $('#resultModal').modal({ backdrop: 'static', keyboard: false }); // hardcoded modal id
+        $('#title').html(title || '--');
+        $('#author').html(name || '--');
     }
 }
 
