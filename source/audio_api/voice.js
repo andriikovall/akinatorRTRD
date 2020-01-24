@@ -44,21 +44,22 @@ const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
         return formData;
     }
 
-        function stopRecording(cb) {
-            toggleRecording(fileData => makeRequest(fileData, cb));
-        }
+    function stopRecording(cb) {
+        toggleRecording(fileData => makeRequest(fileData, cb));
+    }
 
     return {
         onSearchByVoiceStart: toggleRecording,
         onSearchByVoiceEnd: () => stopRecording(handleVoiceResponse)
-    }
+    };
 })();
 
 
 function handleVoiceResponse({ result }) {
     console.log('result:', result);
     if (!result) {
-        //handle somehow VOVA
+        alertSongNotFound();
+        return;
     }
     result.song_id = result.deezer.id;
     clearTable();

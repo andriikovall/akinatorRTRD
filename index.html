@@ -125,7 +125,7 @@
                 <div class="section-search text-center mx-auto">
                     <div class="row">
                         <div id="soundBlock" class="col-9 text-center" style="display: none;">
-                            <button class="btn micro-btn" id="searchByVoiceButton"><i class="fas fa-microphone"></i></button>
+                            <button class="btn micro-btn pink-btn" id="searchByVoiceButton" onclick="alertStartRecording()"><i class="fas fa-microphone" style="font-size: 4em;"></i></button>
                         </div>
                         <div id="textBlock" class="col-9" style="display: none;">
                             <button class="btn btn-block" id="searchByLyricsButton">Search by text</button>
@@ -207,7 +207,7 @@
                 <h5 class="modal-title" id="recordingModalLabel">Recording...</h5>
             </div>
             <div id="recording-btn" class="modal-body px-2 text-center" style="height: 168px;" style="border: none;">
-                <button class="btn recording-btn" onclick="alertStopRecording()" id="searchByVoiceButton"><i
+                <button class="btn recording-btn" onclick="alertStopRecording()"><i
                         class="fas fa-microphone"></i></button>
             </div>
             <div id="recordingModalFooter" class="modal-footer" style="display: none;">

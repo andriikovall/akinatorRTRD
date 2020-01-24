@@ -26,7 +26,7 @@ function finishRound() {
 }
 
 function onSearchByMicroStart(event) {
-
+    // я уже сделал похожые функции, так что нету смысла реализововать
 }
 
 function onSearchByMicroFinish(event) {
@@ -82,7 +82,7 @@ function onSongClicked(event) {
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
     const id = target.getAttribute('song_id');
 
-    document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id);
+    document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
 }
 
 function renderTable() {
@@ -265,3 +265,4 @@ function findSimilar(arr1, arr2) {
 searchByLyricsButton.addEventListener("click", onSearchByLyrics);
 supposeRejectButton.addEventListener("click", onSupposeReject);
 supposeConfirmButton.addEventListener("click", onSupposeConfirm);
+// @todo refactor

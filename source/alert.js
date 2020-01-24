@@ -11,7 +11,12 @@ function alertSongNotFound() {
 }
 
 function alertStartRecording() {
-    $('#recordingModal').modal();
+    try {
+        onSearchByVoiceStart();
+        $('#recordingModal').modal();
+    } catch {
+        //
+    }
 }
 
 function alertChangeGamemode() {
@@ -19,15 +24,17 @@ function alertChangeGamemode() {
 }
 
 function alertStopRecording() {
-    document.getElementById('recording-btn').style.display = 'none'
-    document.getElementById('recordingModalLabel').innerHTML = 'Recording completed'
-    document.getElementById('recordingModalFooter').style.display = 'inline'
+    onSearchByVoiceEnd();
+    const recordingModalLabel = document.getElementById('recordingModalLabel');
+    recordingModalLabel.innerHTML = 'Recording completed';
+    recordingModalLabel.style.display = 'inline';
+    setTimeout(() => $('#recordingModal').modal('toggle'), 1000);
 }
 
 function toDefault() {
-    document.getElementById('recording-btn').style.display = 'inline'
-    document.getElementById('recordingModalLabel').innerHTML = 'Recording...'
-    document.getElementById('recordingModalFooter').style.display = 'none'
+    document.getElementById('recording-btn').style.display = 'inline';
+    document.getElementById('recordingModalLabel').innerHTML = 'Recording...';
+    document.getElementById('recordingModalFooter').style.display = 'none';
 }
 
 function gmSound() {

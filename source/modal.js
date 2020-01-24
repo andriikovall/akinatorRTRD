@@ -1,4 +1,8 @@
 function openModalForSong(song) {
+    if (!song) {
+        alertSongNotFound();
+        return;
+    }
     if (song.deezer && song.deezer.id && song.deezer.link) {
         song.id = song.deezer.id;
         song.link = song.deezer.link;
@@ -7,9 +11,11 @@ function openModalForSong(song) {
     } else {
         getDetailedSongInfo(song.title, song.artist)
             .then(x => {
-                console.log("AFTER THEN");
-                console.log(x);
-                openModal(x);
+                if (!x) {
+                    alertSongNotFound();
+                } else {
+                    openModal(x);
+                }
             });
     }
 
