@@ -17,12 +17,12 @@ function onSupposeConfirm(event) {
 }
 
 function finishRound() {
-    let currRound = localStorage.getItem("currRound");
+    let currRound = sessionStorage.getItem("currRound");
     console.log("Starting round:" + currRound);
     renderTable();
-    localStorage.setItem("currRound", JSON.stringify(1 + parseInt(currRound)));
-    localStorage.setItem("answers", JSON.stringify([]));
-    localStorage.setItem("answersHistory", JSON.stringify([]));
+    sessionStorage.setItem("currRound", JSON.stringify(1 + parseInt(currRound)));
+    sessionStorage.setItem("answers", JSON.stringify([]));
+    sessionStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
 function onSearchByMicroStart(event) {
@@ -76,7 +76,7 @@ function showModal() {
 }
 
 function clearTable() {
-    const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     if (!answersHistory || !answersHistory.length) {
         resultsTableBlock.innerHTML = "";
     }
@@ -92,7 +92,7 @@ function onSongClicked(event) {
 }
 
 function renderTable() {
-    const answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     // resultsTableBlock.innerHTML= "";
     if (answersHistory) {
         let lastAnswer = answersHistory[answersHistory.length - 1];
@@ -105,41 +105,41 @@ function renderTable() {
 
 function shiftAnswersArray() {
     console.log("shiftAnswersArr");
-    let answersArray = JSON.parse(localStorage.getItem("answers")) || [];
+    let answersArray = JSON.parse(sessionStorage.getItem("answers")) || [];
     console.log(answersArray);
     console.log("shifted answ");
     let returnAnswer = answersArray.shift();
     console.log(returnAnswer);
 
-    localStorage.setItem("answers", JSON.stringify(answersArray));
+    sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
-    let answersHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     answersHistory.push(returnAnswer);
-    localStorage.setItem("answersHistory", JSON.stringify(answersHistory));
+    sessionStorage.setItem("answersHistory", JSON.stringify(answersHistory));
 
     return returnAnswer;
 }
 
 function getPossibleAnswer() {
-    return JSON.parse(localStorage.getItem("answers"))[0];
+    return JSON.parse(sessionStorage.getItem("answers"))[0];
 }
 
 function saveFetchResult(response) {
     // IF PLAYING FOR THE VERU FIRST TIME
-    if (!localStorage.getItem("currRound") || !localStorage.getItem("rounds")) {
-        localStorage.setItem("currRound", 1);
-        localStorage.setItem("rounds", JSON.stringify([
+    if (!sessionStorage.getItem("currRound") || !sessionStorage.getItem("rounds")) {
+        sessionStorage.setItem("currRound", 1);
+        sessionStorage.setItem("rounds", JSON.stringify([
             [],
             []
         ]));
-        localStorage.setItem("answers", JSON.stringify([]));
-        localStorage.setItem("answersHistory", JSON.stringify([]));
+        sessionStorage.setItem("answers", JSON.stringify([]));
+        sessionStorage.setItem("answersHistory", JSON.stringify([]));
 
-        console.log('!localStorage.getItem("currRound") || !localStorage.getItem("rounds")');
+        console.log('!sessionStorage.getItem("currRound") || !sessionStorage.getItem("rounds")');
     }
 
-    let currRoundIndex = localStorage.getItem("currRound");
-    let rounds = JSON.parse(localStorage.getItem("rounds"));
+    let currRoundIndex = sessionStorage.getItem("currRound");
+    let rounds = JSON.parse(sessionStorage.getItem("rounds"));
 
     console.log(`Current round: ${currRoundIndex}`);
 
@@ -158,9 +158,9 @@ function saveFetchResult(response) {
 
     currRound.push(response);
 
-    localStorage.setItem("rounds", JSON.stringify(rounds));
+    sessionStorage.setItem("rounds", JSON.stringify(rounds));
 
-    let answerArray = JSON.parse(localStorage.getItem("answers"));
+    let answerArray = JSON.parse(sessionStorage.getItem("answers"));
     console.log(`AnswerArray1: ${answerArray}`);
     if (!answerArray.length) {
         console.log('ERR--!answerArray.length');
@@ -169,7 +169,7 @@ function saveFetchResult(response) {
             recompileAnswers();
         } else {
             console.log("answers set to default");
-            localStorage.setItem("answers", JSON.stringify(response));
+            sessionStorage.setItem("answers", JSON.stringify(response));
         }
     } else {
         answerArray = findSimilar(answerArray, response);
@@ -178,11 +178,11 @@ function saveFetchResult(response) {
             recompileAnswers();
         } else {
             console.log(`SImilars: ${answerArray}`);
-            localStorage.setItem("answers", JSON.stringify(answerArray));
+            sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
 
-    //console.log(localStorage);
+    //console.log(sessionStorage);
     if (currRound.length >= 5) {
         console.log("currRound.length >= 4");
         console.log("FINISHING ROUNd");
@@ -193,7 +193,7 @@ function saveFetchResult(response) {
 }
 
 function recompileAnswers() {
-    const currentRoundArray = JSON.parse(localStorage.getItem("rounds"))[localStorage.getItem("currRound")];
+    const currentRoundArray = JSON.parse(sessionStorage.getItem("rounds"))[sessionStorage.getItem("currRound")];
     console.log("currentRoundArray:");
     console.log(currentRoundArray);
     let allVariants = [];
@@ -237,7 +237,7 @@ function recompileAnswers() {
     }
     console.log("New Answers:");
     console.log(newAnswersArray);
-    const answHistory = JSON.parse(localStorage.getItem("answersHistory"));
+    const answHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     if (answHistory) {
         //Deleting rejected answers
         console.log("Deleting rejected answers...");
@@ -249,7 +249,7 @@ function recompileAnswers() {
     }
     console.log("newANSWERS ARRAY:");
     console.log(newAnswersArray);
-    localStorage.setItem("answers", JSON.stringify(newAnswersArray));
+    sessionStorage.setItem("answers", JSON.stringify(newAnswersArray));
 }
 
 function findSimilar(arr1, arr2) {
