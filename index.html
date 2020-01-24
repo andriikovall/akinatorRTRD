@@ -123,19 +123,27 @@
             </div>
             <div class="col-md-12 col-lg-5 col-sm-12 col-xl-5 second-column">
                 <div class="section-search text-center mx-auto">
-                    <div class="row">
-                        <div id="soundBlock" class="col-9 text-center" style="display: none;">
-                            <button class="btn micro-btn pink-btn" id="searchByVoiceButton" onclick="alertStartRecording()"><i class="fas fa-microphone" style="font-size: 4em;"></i></button>
-                        </div>
-                        <div id="textBlock" class="col-9" style="display: none;">
-                            <button class="btn btn-block" id="searchByLyricsButton">Search by text</button>
-                            <div class="text-container">
-                                <textarea placeholder="Enter lyrics or name of song you want to find" class="form-control" id="searchByLyricsInput" rows="6"></textarea>
-                                <!-- <label for="exampleFormControlTextarea1">Large textarea</label> -->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="soundBlock" class="text-center" style="display: none; width: 100%;">
+                                    <button class="btn micro-btn pink-btn" id="searchByVoiceButton" onclick="alertStartRecording()"><i class="fas fa-microphone" style="font-size: 4em;"></i></button>
+                                </div>
+                                <div id="textBlock" style="display: none;">
+                                    <div id="text-container">
+                                        <textarea placeholder="Enter lyrics or name of song you want to find" class="form-control" id="searchByLyricsInput" rows="6"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <button onclick="alertChangeGamemode()" style="height: 100%;" class="btn btn-block " id="searchByLyricsButton"><i class="fas fa-arrow-right"></i></button>
+                        <div class="row mt-3">
+                            <div class="col-9">
+                                <button class="btn btn-block" id="searchByLyricsButton">Search by text</button>
+                            </div>
+                            <div class="col-3">
+                                <button onclick="alertChangeGamemode()" class="btn" id="searchByLyricsButton"><i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
