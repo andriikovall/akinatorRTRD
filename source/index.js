@@ -59,8 +59,14 @@ function onSearchByLyrics(event) {
         console.log("RESPONCE");
         console.log(res);
         clearTable();
-        saveFetchResult(res.result);
-        showModal();
+        if(saveFetchResult(res.result)){
+            showModal();
+        }else {
+            console.log("FINISHING game in Event handler");
+            finishRound();
+            alertVictory();
+        }
+    }).then(res2=>{
         searchByLyricsButton.innerHTML = 'Search by text';
         searchByLyricsButton.disabled = false;
     }).catch(x => {
@@ -75,7 +81,9 @@ function showModal() {
     if (!answVariant) {
         console.log("!answVariant");
         //TODO CASE NO ANSWERS
+        return;
     }
+    
     console.log("Answer Variant");
     console.log(answVariant);
     openModalForSong(answVariant);
@@ -100,7 +108,12 @@ function onSongClicked(event) {
 function renderTable() {
     const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     // resultsTableBlock.innerHTML= "";
-    if (answersHistory) {
+
+    let check = answersHistory.every(elem => !elem);
+    if (check){
+        console.log("Empty Answer History!");
+    }
+    else  {
         let lastAnswer = answersHistory[answersHistory.length - 1];
         resultsTableBlock.innerHTML +=
             `<tr song_id="${lastAnswer.song_id}" onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title || lastAnswer.title}</td></tr>`;
@@ -120,6 +133,10 @@ function shiftAnswersArray() {
     sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
+    if(!answersHistory){
+        console.log("Answers History is Empty");
+        return null;
+    }
     answersHistory.push(returnAnswer);
     sessionStorage.setItem("answersHistory", JSON.stringify(answersHistory));
 
@@ -188,14 +205,12 @@ function saveFetchResult(response) {
         }
     }
 
-    //console.log(sessionStorage);
     if (currRound.length >= 5) {
-        console.log("currRound.length >= 4");
+        console.log("currRound.length > 4");
         console.log("FINISHING ROUNd");
-        finishRound();
-        alertVictory();
-
+        return false;
     }
+    return true;
 }
 
 function recompileAnswers() {

@@ -1,12 +1,15 @@
 function openModalForSong(song) {
     if (!song) {
+        console.log("SOng Cant be found");
         alertSongNotFound();
+        renderTable();
+
         return;
     }
     if (song.deezer && song.deezer.id && song.deezer.link) {
         song.id = song.deezer.id;
         song.link = song.deezer.link;
-        song.artist = song.deezer.artist; // бля пизда. АПИ АУДД.ио пизда ебаная
+        song.artist = song.deezer.artist; 
         openModal(song);
     } else {
         getDetailedSongInfo(song.title, song.artist)

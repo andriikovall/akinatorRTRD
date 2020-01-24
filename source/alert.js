@@ -64,9 +64,7 @@ function changeGamemode() {
     const rounds = JSON.parse(sessionStorage.getItem('rounds'));
     rounds[currRoundIndex] = [];
     sessionStorage.setItem('rounds', JSON.stringify(rounds));
-    const answersHistory = JSON.parse(sessionStorage.getItem('answersHistory'));
-    answersHistory.length = 0;
-    sessionStorage.setItem('answersHistory', answersHistory);
+    sessionStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
 $('#choosingModal').modal({ backdrop: 'static' });
