@@ -65,15 +65,4 @@ function handleVoiceResponse({ result }) {
     clearTable();
     saveFetchResult([result]);
     showModal();
-    // getDetailedSongInfo(result.title, result.artist)
-    // .then((res) => { 
-    //         result.song_id = res.id;
-    //         console.log('result:', result);
-    //         return result;
-    //     })
-    // .then(r => {
-    //     clearTable();
-    //     saveFetchResult(r);
-    //     showModal();
-    // });
 }

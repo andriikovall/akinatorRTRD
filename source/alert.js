@@ -57,6 +57,11 @@ function changeGamemode() {
     } else if (sessionStorage.getItem('mode') === 'text') {
         gmSound();  
     }
+    let currRoundIndex = sessionStorage.getItem("currRound");
+    let rounds = JSON.parse(sessionStorage.getItem("rounds"));
+    rounds[currRoundIndex] = [];
+    sessionStorage.setItem("rounds", JSON.stringify(rounds));
+
 }
 
 $('#choosingModal').modal({ backdrop: 'static' });
