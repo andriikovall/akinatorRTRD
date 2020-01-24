@@ -1,6 +1,6 @@
 function alertVictory() {
     $('#victoryModal').modal();
-    setTimeout(() => $('#songNotFoundModal').modal('toggle'), 1000);
+    // setTimeout(() => $('#songNotFoundModal').modal('toggle'), 1000);
 }
 
 function alertLose() {
