@@ -115,8 +115,36 @@
             <div class="col-md-12 col-lg-5 col-sm-12 col-xl-5 second-column">
                 <div class="section-search text-center mx-auto">
                     <div class="container-fluid">
+
                         <div class="row">
-                            <div class="col-12">
+                            <div id="soundBlock" style="display: none; width: 100%;">
+                                <div class="col-9 text-center">
+                                    <button class="btn micro-btn pink-btn" id="searchByVoiceButton" onclick="alertStartRecording()"><i class="fas fa-microphone" style="font-size: 4em;"></i></button>
+                                </div>
+                                <div class="col-3">
+                                    <button onclick="alertChangeGamemode()" class="btn"><i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div id="textBlock" style="display: none; width: 100%;">
+                                <div class="col-12 text-center">
+                                    <div id="text-container">
+                                        <textarea placeholder="Enter lyrics or name of song you want to find" class="form-control" id="searchByLyricsInput" rows="6"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <button class="btn btn-block" id="searchByLyricsButton">Search by text</button>
+                                </div>
+                                <div class="col-3">
+                                    <button onclick="alertChangeGamemode()" class="btn"><i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="row">
+                            <div class="col-9">
                                 <div id="soundBlock" class="text-center" style="display: none; width: 100%;">
                                     <button class="btn micro-btn pink-btn" id="searchByVoiceButton" onclick="alertStartRecording()"><i class="fas fa-microphone" style="font-size: 4em;"></i></button>
                                 </div>
@@ -135,7 +163,9 @@
                                 <button onclick="alertChangeGamemode()" class="btn" id="searchByLyricsButton"><i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
+
+
                     </div>
                 </div>
             </div>
