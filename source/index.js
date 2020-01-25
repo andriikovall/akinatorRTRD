@@ -86,7 +86,7 @@ function showModal() {
     let answVariant = shiftAnswersArray();
     if (!answVariant) {
         console.log("!answVariant");
-        //TODO CASE NO ANSWERS
+        alertSongNotFound();
         return;
     }
 
@@ -114,22 +114,24 @@ function clearTable() {
 
 function onSongClicked(event) {
     event.preventDefault();
-    document.getElementById('playerPlaceholder').style.display = "none"
-    document.getElementById('player').style.display = "inline"
-
-
+    
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
     const id = target.getAttribute('song_id');
 
-
     console.log(id)
-
-    if(id != 0){
-        document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
+    
+    const playerContainer = document.getElementById('playerContainer');
+    if(id != 0) {
+        document.getElementById('playerPlaceholder').style.display = "none";
+        playerContainer.style.display = "block";
+        playerContainer.style.height = '250px';
+        playerContainer.innerHTML = createSongPlayerByDeezId(id, 230);
     }
     else {
         console.log("SOng doesnt has a player");
-        // TOAST CASE NO PLAYER REQUIRED 
+        document.getElementById('playerPlaceholder').style.display = "block";
+        playerContainer.style.display = "none";
+        mdtoast("This song doesn't have a player", { duration: 7000 });          
     }
 
 

@@ -46,6 +46,7 @@ function openModalForSong(song) {
         $('.modal-body #player').html(createSongPlayerByDeezId(id));
         $('#title').html(full_title || title || '--');
         $('#author').html(name|| artist || '--');
+        $('#link-row').css('display', 'table-row');
         $('#link').attr("href", link);
         // todo more fields probably
     }
@@ -68,7 +69,7 @@ function openModalForSong(song) {
         $('.modal-body #player').html("");
         $('#title').html(full_title || title || '--');
         $('#author').html(artist || '--');
-        $('#link').html("");
+        $('#link-row').css('display', 'none');
     }
 
 
