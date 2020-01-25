@@ -5,6 +5,8 @@ const currentResultPlayer = document.getElementById("playerContainer");
 const supposeRejectButton = document.getElementById("supposeRejectButton");
 const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 
+sessionStorage.setItem("playerPlaseholder", "true")
+
 function onSupposeReject(event) {
     console.log("suppose rejected");
 
@@ -112,10 +114,16 @@ function clearTable() {
 
 function onSongClicked(event) {
     event.preventDefault();
+    document.getElementById('playerPlaceholder').style.display = "none"
+    document.getElementById('player').style.display = "inline"
+
 
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
-
     const id = target.getAttribute('song_id');
+
+
+    console.log(id)
+
     if(id != 0){
         document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
     }
@@ -123,6 +131,7 @@ function onSongClicked(event) {
         console.log("SOng doesnt has a player");
         // TOAST CASE NO PLAYER REQUIRED 
     }
+
 
 }
 
