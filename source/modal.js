@@ -1,6 +1,5 @@
 function openModalForSong(song) {
     if (!song) {
-        console.log("SOng Cant be found");
         alertSongNotFound();
         renderTable();
         return;
@@ -9,16 +8,14 @@ function openModalForSong(song) {
         song.id = song.deezer.id;
         song.link = song.deezer.link;
         song.artist = song.deezer.artist;
+        checkIfHasPlayer(song.id, song.id, true);
         openModal(song);
     } else {
         getDetailedSongInfo(song.title, song.artist)
             .then(x => {
-                console.log("X");
-                console.log(x);
                 if (!x) {
                     openModalWithoutPlayer(song);
                 } else {
-                    console.log("CHecking for player...");
                     checkIfHasPlayer(song.song_id, x.id, true);
                     openModal(x);
                 }
@@ -34,18 +31,13 @@ function openModalForSong(song) {
         link,
         full_title
     }) {
-        console.log('OPEN MODAL');
-        console.log(arguments[0]);
-        if (arguments[0] == null) {
-            //todo smth with null song
-        }
         $('#resultModal').modal({
             backdrop: 'static',
             keyboard: false
         });
         $('.modal-body #player').html(createSongPlayerByDeezId(id));
         $('#title').html(full_title || title || '--');
-        $('#author').html(name|| artist || '--');
+        $('#author').html(name || artist || '--');
         $('#link-row').css('display', 'table-row');
         $('#link').attr("href", link);
         // todo more fields probably
@@ -56,16 +48,10 @@ function openModalForSong(song) {
         artist,
         full_title
     }) {
-
-        if (arguments[0] == null) {
-            //todo smth with null song
-        }
-        console.log('openModalWithoutPlayer');
-        console.log(arguments[0]);
         $('#resultModal').modal({
             backdrop: 'static',
             keyboard: false
-        }); // hardcoded modal id
+        });
         $('.modal-body #player').html("");
         $('#title').html(full_title || title || '--');
         $('#author').html(artist || '--');
@@ -76,17 +62,14 @@ function openModalForSong(song) {
 
     function checkIfHasPlayer(song_id, deezer_id, hasPlayer) {
         let answHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-        console.log("CHECK IF HAS PLAYER");
         answHistory.forEach(element => {
-            if (element.song_id === song_id) {
-                element.hasPlayer = hasPlayer;
-                element.deezer_id = deezer_id;
-
-                console.log(`Set ${element.title || element.full_title} Has player to ${hasPlayer}`);
+            if (element) {
+                if (element.song_id === song_id) {
+                    element.hasPlayer = hasPlayer;
+                    element.deezer_id = deezer_id;
+                }
             }
         });
-        console.log("answ History:");
-        console.log(answHistory);
         sessionStorage.setItem("answersHistory", JSON.stringify(answHistory));
     }
 }
@@ -108,8 +91,7 @@ function getDetailedSongInfo(title, artistName) {
         .then(({
             data
         }) => {
-            console.log("DATA & DATA[0]");
-            console.log(data);
             return data[0] || null;
         });
+
 }
