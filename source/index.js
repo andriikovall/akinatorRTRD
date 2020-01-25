@@ -289,13 +289,20 @@ function recompileAnswers() {
     console.log("New Answers:");
     console.log(newAnswersArray);
     const answHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
+    console.log(answHistory);
+    // let check = answHistory.every(elem => !elem);
+
     if (answHistory) {
         //Deleting rejected answers
         console.log("Deleting rejected answers...");
         answHistory.forEach(a => {
-            newAnswersArray = newAnswersArray.filter(b => {
-                return b.song_id !== a.song_id;
-            })
+            if(a){
+                newAnswersArray = newAnswersArray.filter(b => {
+                    if(b){
+                        return b.song_id !== a.song_id;
+                    }
+                })
+            }
         });
     }
     console.log("newANSWERS ARRAY:");

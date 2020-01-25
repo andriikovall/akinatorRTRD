@@ -79,11 +79,13 @@ function openModalForSong(song) {
         let answHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
         console.log("CHECK IF HAS PLAYER");
         answHistory.forEach(element => {
-            if (element.song_id === song_id) {
-                element.hasPlayer = hasPlayer;
-                element.deezer_id = deezer_id;
-
-                console.log(`Set ${element.title || element.full_title} Has player to ${hasPlayer}`);
+            if(element){
+                if (element.song_id === song_id) {
+                    element.hasPlayer = hasPlayer;
+                    element.deezer_id = deezer_id;
+    
+                    console.log(`Set ${element.title || element.full_title} Has player to ${hasPlayer}`);
+                }
             }
         });
         console.log("answ History:");
