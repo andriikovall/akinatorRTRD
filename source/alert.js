@@ -15,7 +15,7 @@ function alertStartRecording() {
     try {
         onSearchByVoiceStart();
         $('#recordingModalLabel').html('Recording...');
-        $('#recordingModal').modal();
+        $('#recordingModal').modal({ backdrop: 'static' });
     } catch {
         //
     }
@@ -64,7 +64,7 @@ function changeGamemode() {
     rounds[currRoundIndex] = [];
     sessionStorage.setItem('rounds', JSON.stringify(rounds));
     sessionStorage.setItem("answersHistory", JSON.stringify([]));
-    
+
     clearTable();
 }
 
