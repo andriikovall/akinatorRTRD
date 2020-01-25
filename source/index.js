@@ -9,6 +9,14 @@ sessionStorage.setItem("playerPlaseholder", "true")
 
 function onSupposeReject(event) {
     console.log("suppose rejected");
+
+    const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
+
+    if(answersHistory.length >= 5){
+        alertVictory();
+        finishRound();
+    }
+
     renderTable();
 }
 
@@ -60,15 +68,11 @@ function onSearchByLyrics(event) {
     }).then(res => {
         console.log("RESPONCE");
         console.log(res);
+        saveFetchResult(res.result);
         clearTable();
-        if (saveFetchResult(res.result)) {
-            showModal();
-        } else {
-            console.log("FINISHING game in Event handler");
-            finishRound();
-            alertVictory();
-        }
-    }).then(res2 => {
+        showModal();
+        
+    }).then(res2=>{
         searchByLyricsButton.innerHTML = 'Search by text';
         searchByLyricsButton.disabled = false;
     }).catch(x => {
@@ -93,8 +97,18 @@ function showModal() {
 
 function clearTable() {
     const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-    if (!answersHistory || !answersHistory.length) {
+    let rounds = JSON.parse(sessionStorage.getItem("rounds"));
+    let currRoundIndex = JSON.parse(sessionStorage.getItem("currRound"));
+    const checkIfRoundsIsEmpty = rounds[currRoundIndex];
+    const checkIfAnswerHistoryIsEmpty = (!answersHistory  || !answersHistory.length);
+    console.log("checkif Rounds Empty");
+    console.log(!!!rounds[currRoundIndex]);
+    console.log("AnswersHistory");
+    console.log(checkIfAnswerHistoryIsEmpty);
+    console.log("check");
+    if ((checkIfAnswerHistoryIsEmpty && checkIfRoundsIsEmpty ) || answersHistory.length>=5) {
         resultsTableBlock.innerHTML = "";
+        console.log("CELAR TABLE NOT PASSED");
     }
 }
 
@@ -107,9 +121,18 @@ function onSongClicked(event) {
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
     const id = target.getAttribute('song_id');
 
+
     console.log(id)
 
-    document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
+    if(id != 0){
+        document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
+    }
+    else {
+        console.log("SOng doesnt has a player");
+        // TOAST CASE NO PLAYER REQUIRED 
+    }
+
+
 }
 
 function renderTable() {
@@ -119,10 +142,16 @@ function renderTable() {
     let check = answersHistory.every(elem => !elem);
     if (check) {
         console.log("Empty Answer History!");
-    } else {
+
+    } else  {
+
         let lastAnswer = answersHistory[answersHistory.length - 1];
+        console.log("renderTable -> lastanswer");
+        console.log(lastAnswer);
         resultsTableBlock.innerHTML +=
-            `<tr song_id="${lastAnswer.song_id}" onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}</th><td>${lastAnswer.full_title || lastAnswer.title}</td></tr>`;
+            `<tr song_id="${lastAnswer.hasPlayer ? lastAnswer.deezer_id : 0}"
+            onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}
+            </th><td>${lastAnswer.full_title || lastAnswer.title}</td></tr>`;
     }
     console.log("Rendering Answers Table");
     console.log("----------------------");
@@ -183,8 +212,13 @@ function saveFetchResult(response) {
         rounds[currRoundIndex] = new Array();
         currRound = rounds[currRoundIndex];
     }
-    // console.log(currRound);
 
+    if (currRound.length >= 5) {
+        console.log("currRound.length > 4");
+        console.log("FINISHING ROUNd");
+        return false;
+    }
+   
     currRound.push(response);
 
     sessionStorage.setItem("rounds", JSON.stringify(rounds));
@@ -210,13 +244,6 @@ function saveFetchResult(response) {
             sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
-
-    if (currRound.length >= 5) {
-        console.log("currRound.length > 4");
-        console.log("FINISHING ROUNd");
-        return false;
-    }
-    return true;
 }
 
 function recompileAnswers() {
