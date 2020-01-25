@@ -1,9 +1,9 @@
-const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
+const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function() {
     let recorder, gumStream;
 
     function toggleRecording(cb) {
         if (recorder && recorder.state == "recording") {
-            recorder.ondataavailable = function (e) {
+            recorder.ondataavailable = function(e) {
                 cb(e.data);
             };
             recorder.stop();
@@ -21,26 +21,26 @@ const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function () {
 
     function makeRequest(fileData, cb) {
         const formData = createFormDataFromObj({
-            api_token: audApiToken, 
+            api_token: audApiToken,
             return: 'deezer',
             file: fileData
         });
         fetch('https://api.audd.io/', {
-            method: 'POST', 
-            body: formData
-        })
-        .then(r => r.json()) 
-        .then(cb);
+                method: 'POST',
+                body: formData
+            })
+            .then(r => r.json())
+            .then(cb);
     }
-    
-    
+
+
     function createFormDataFromObj(obj) {
         const formData = new FormData();
-    
+
         for (const name in obj) {
             formData.append(name, obj[name]);
         }
-    
+
         return formData;
     }
 
@@ -61,8 +61,10 @@ function handleVoiceResponse({ result }) {
         alertSongNotFound();
         return;
     }
-    result.song_id = result.deezer.id;
-    saveFetchResult([result]);
-    clearTable();
-    showModal();
+    if (result.deezer) {
+        result.song_id = result.deezer.id;
+        saveFetchResult([result]);
+        clearTable();
+        showModal();
+    } else alertSongNotFound()
 }
