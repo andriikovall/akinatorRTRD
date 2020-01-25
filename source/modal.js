@@ -12,7 +12,7 @@ function openModalForSong(song) {
         checkIfHasPlayer(song.id, song.id, true);
         openModal(song);
     } else {
-        getDetailedSongInfo(song.title, song.artist)
+        getDetailedSongInfo(song.title, song.artist) 
             .then(x => {
                 console.log("X");
                 console.log(x);
