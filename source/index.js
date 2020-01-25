@@ -12,6 +12,7 @@ function onSupposeReject(event) {
     if(answersHistory.length >= 5){
         alertVictory();
         finishRound();
+        increaseScore();
     }
     renderTable();
 }
@@ -72,13 +73,6 @@ function onSearchByLyrics(event) {
 
 function showModal() {
     let answVariant = shiftAnswersArray();
-    if (!answVariant) {
-        console.log("!answVariant");
-        //TODO CASE NO ANSWERS
-    }
-    
-    console.log("Answer Variant");
-    console.log(answVariant);
     openModalForSong(answVariant);
 }
 
@@ -86,16 +80,11 @@ function clearTable() {
     const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     let rounds = JSON.parse(sessionStorage.getItem("rounds"));
     let currRoundIndex = JSON.parse(sessionStorage.getItem("currRound"));
+    
     const checkIfRoundsIsEmpty = rounds[currRoundIndex];
     const checkIfAnswerHistoryIsEmpty = (!answersHistory  || !answersHistory.length);
-    console.log("checkif Rounds Empty");
-    console.log(!!!rounds[currRoundIndex]);
-    console.log("AnswersHistory");
-    console.log(checkIfAnswerHistoryIsEmpty);
-    console.log("check");
     if ((checkIfAnswerHistoryIsEmpty && checkIfRoundsIsEmpty ) || answersHistory.length>=5) {
         resultsTableBlock.innerHTML = "";
-        console.log("CELAR TABLE NOT PASSED");
     }
 }
 
@@ -168,6 +157,7 @@ function saveFetchResult(response) {
             []
         ]));
         sessionStorage.setItem("answers", JSON.stringify([]));
+        sessionStorage.setItem("score", JSON.stringify(0));
         sessionStorage.setItem("answersHistory", JSON.stringify([]));
 
         console.log('!sessionStorage.getItem("currRound") || !sessionStorage.getItem("rounds")');
@@ -300,7 +290,43 @@ function findSimilar(arr1, arr2) {
     return inter;
 }
 
+function renderScore(){
+    const userScore = sessionStorage.getItem("score");
+    let alertText = `<bold>Your score:</bold>[${userScore}]`
+    if(!userScore){
+        let alertText = `<bold>Your score:</bold>[0]`;
+    }
+
+    // RENDER LABEL WITH SCORE HERE
+}
+function increaseScore(){
+    let currScore = sessionStorage.getItem("score");
+    console.log(`Curr score: ${currScore}`);
+    if(currScore){
+        currScore = parseInt(currScore);
+        console.log(`New score: ${currScore +1 }`);
+        sessionStorage.setItem("score", currScore + 1);
+    } else {
+        console.log(`Set Score to standart}`);
+        sessionStorage.setItem("score", 1);
+    }
+    renderScore();
+}
+function initStorage(){
+    let rounds = sessionStorage.getItem("rounds")
+    if(rounds){
+        rounds = JSON.parse(rounds);
+        const currRoundIndex = sessionStorage.getItem("currRound");
+        rounds[currRoundIndex] = [];
+        sessionStorage.setItem("rounds", JSON.stringify(rounds));
+    }
+        sessionStorage.setItem("answers", JSON.stringify([]));
+        sessionStorage.setItem("answersHistory", JSON.stringify([]));
+        renderScore();
+
+}
 searchByLyricsButton.addEventListener("click", onSearchByLyrics);
 supposeRejectButton.addEventListener("click", onSupposeReject);
 supposeConfirmButton.addEventListener("click", onSupposeConfirm);
 // @todo refactor
+document.addEventListener("DOMContentLoaded", initStorage);

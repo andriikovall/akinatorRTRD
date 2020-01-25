@@ -9,6 +9,7 @@ function openModalForSong(song) {
         song.id = song.deezer.id;
         song.link = song.deezer.link;
         song.artist = song.deezer.artist;
+        checkIfHasPlayer(song.id, song.id, true);
         openModal(song);
     } else {
         getDetailedSongInfo(song.title, song.artist)
