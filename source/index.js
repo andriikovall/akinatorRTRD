@@ -364,9 +364,6 @@ document.addEventListener("DOMContentLoaded", initStorage);
 
 function renderScore() {
     const userScore = sessionStorage.getItem("score");
-    let text = `Your score: ${userScore}`;
-    if (!userScore) {
-        let text = `Your score: 0`
-    }
+    let text = `Your score: ${userScore || 0}`;
     document.getElementById("score").innerHTML = text
 }
