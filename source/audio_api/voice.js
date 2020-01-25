@@ -56,7 +56,6 @@ const { onSearchByVoiceStart, onSearchByVoiceEnd } = (function() {
 
 
 function handleVoiceResponse({ result }) {
-    console.log('result:', result);
     if (!result) {
         alertSongNotFound();
         return;

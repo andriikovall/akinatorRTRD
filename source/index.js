@@ -8,8 +8,6 @@ const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 sessionStorage.setItem("playerPlaseholder", "true")
 
 function onSupposeReject(event) {
-    console.log("suppose rejected");
-
     const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
 
     if (answersHistory.length >= 5) {
@@ -22,14 +20,12 @@ function onSupposeReject(event) {
 }
 
 function onSupposeConfirm(event) {
-    console.log("suppose confirmed");
     finishRound();
     alertLose();
 }
 
 function finishRound() {
     let currRound = sessionStorage.getItem("currRound");
-    console.log("Starting round:" + currRound);
     renderTable();
     sessionStorage.setItem("currRound", JSON.stringify(1 + parseInt(currRound)));
     sessionStorage.setItem("answers", JSON.stringify([]));
@@ -73,8 +69,6 @@ function onSearchByLyrics(event) {
     }).then(x => {
         return x.json();
     }).then(res => {
-        console.log("RESPONCE");
-        console.log(res);
         saveFetchResult(res.result);
         clearTable();
         showModal();
@@ -113,8 +107,6 @@ function onSongClicked(event) {
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
     const id = target.getAttribute('song_id');
 
-    console.log(id)
-
     const playerContainer = document.getElementById('playerContainer');
     if (id != 0) {
         document.getElementById('playerPlaceholder').style.display = "none";
@@ -122,7 +114,6 @@ function onSongClicked(event) {
         playerContainer.style.height = '250px';
         playerContainer.innerHTML = createSongPlayerByDeezId(id, 230);
     } else {
-        console.log("SOng doesnt has a player");
         document.getElementById('playerPlaceholder').style.display = "block";
         playerContainer.style.display = "none";
         mdtoast("This song doesn't have a player", { duration: 7000 });
@@ -142,30 +133,21 @@ function renderTable() {
     } else {
 
         let lastAnswer = answersHistory[answersHistory.length - 1];
-        console.log("renderTable -> lastanswer");
-        console.log(lastAnswer);
         resultsTableBlock.innerHTML +=
             `<tr song_id="${lastAnswer.hasPlayer ? lastAnswer.deezer_id : 0}"
             onclick="onSongClicked(event)"><th scope="row">${answersHistory.length}
             </th><td>${lastAnswer.full_title || lastAnswer.title}</td></tr>`;
     }
-    console.log("Rendering Answers Table");
-    console.log("----------------------");
 }
 
 function shiftAnswersArray() {
-    console.log("shiftAnswersArr");
     let answersArray = JSON.parse(sessionStorage.getItem("answers")) || [];
-    console.log(answersArray);
-    console.log("shifted answ");
     let returnAnswer = answersArray.shift();
-    console.log(returnAnswer);
 
     sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
     if (!answersHistory) {
-        console.log("Answers History is Empty");
         return null;
     }
     answersHistory.push(returnAnswer);
@@ -189,19 +171,10 @@ function saveFetchResult(response) {
         sessionStorage.setItem("answers", JSON.stringify([]));
         sessionStorage.setItem("score", JSON.stringify(0));
         sessionStorage.setItem("answersHistory", JSON.stringify([]));
-
-        console.log('!sessionStorage.getItem("currRound") || !sessionStorage.getItem("rounds")');
     }
 
     let currRoundIndex = sessionStorage.getItem("currRound");
     let rounds = JSON.parse(sessionStorage.getItem("rounds"));
-
-    console.log(`Current round: ${currRoundIndex}`);
-
-    // IN CASE OF ERRORS or user changing localstor
-    if (!rounds) {
-        console.log("!rounds");
-    }
 
     let currRound = rounds[currRoundIndex];
 
@@ -211,8 +184,6 @@ function saveFetchResult(response) {
     }
 
     if (currRound.length >= 5) {
-        console.log("currRound.length > 4");
-        console.log("FINISHING ROUNd");
         return false;
     }
 
@@ -221,23 +192,17 @@ function saveFetchResult(response) {
     sessionStorage.setItem("rounds", JSON.stringify(rounds));
 
     let answerArray = JSON.parse(sessionStorage.getItem("answers"));
-    console.log(`AnswerArray1: ${answerArray}`);
     if (!answerArray.length) {
-        console.log('ERR--!answerArray.length');
         if (currRound && (currRound.length - 1)) {
-            console.log("RECOMPILE>>>");
             recompileAnswers();
         } else {
-            console.log("answers set to default");
             sessionStorage.setItem("answers", JSON.stringify(response));
         }
     } else {
         answerArray = findSimilar(answerArray, response);
         if (!answerArray.length) {
-            console.log("RECOMPILE>>>");
             recompileAnswers();
         } else {
-            console.log(`SImilars: ${answerArray}`);
             sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
@@ -245,14 +210,12 @@ function saveFetchResult(response) {
 
 function recompileAnswers() {
     const currentRoundArray = JSON.parse(sessionStorage.getItem("rounds"))[sessionStorage.getItem("currRound")];
-    console.log("currentRoundArray:");
-    console.log(currentRoundArray);
+
     let allVariants = [];
     currentRoundArray.forEach(element => {
         allVariants = allVariants.concat(element);
     });
-    console.log("All Variants:");
-    console.log(allVariants);
+
     let resultsMatrix = [
         [],
         [],
@@ -271,13 +234,9 @@ function recompileAnswers() {
             }
         }
 
-        console.log("Answers");
-        console.log(tmpVar1.full_title);
-        console.log(tmpIterator);
         resultsMatrix[tmpIterator].push(tmpVar1);
     }
-    console.log("REsults Matrix:");
-    console.log(resultsMatrix);
+
 
     let newAnswersArray = new Array();
 
@@ -286,15 +245,10 @@ function recompileAnswers() {
             newAnswersArray.push(resultsMatrix[i][j]);
         }
     }
-    console.log("New Answers:");
-    console.log(newAnswersArray);
+
     const answHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-    console.log(answHistory);
-    // let check = answHistory.every(elem => !elem);
 
     if (answHistory) {
-        //Deleting rejected answers
-        console.log("Deleting rejected answers...");
         answHistory.forEach(a => {
             if(a){
                 newAnswersArray = newAnswersArray.filter(b => {
@@ -305,8 +259,6 @@ function recompileAnswers() {
             }
         });
     }
-    console.log("newANSWERS ARRAY:");
-    console.log(newAnswersArray);
     sessionStorage.setItem("answers", JSON.stringify(newAnswersArray));
 }
 
@@ -321,8 +273,6 @@ function findSimilar(arr1, arr2) {
             }
         }
     }
-    console.log("INTER");
-    console.log(inter);
     return inter;
 }
 
@@ -338,13 +288,10 @@ function renderScore() {
 
 function increaseScore() {
     let currScore = sessionStorage.getItem("score");
-    console.log(`Curr score: ${currScore}`);
     if (currScore) {
         currScore = parseInt(currScore);
-        console.log(`New score: ${currScore +1 }`);
         sessionStorage.setItem("score", currScore + 1);
     } else {
-        console.log(`Set Score to standart}`);
         sessionStorage.setItem("score", 1);
     }
     renderScore();
