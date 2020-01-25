@@ -12,7 +12,7 @@ function openModalForSong(song) {
         checkIfHasPlayer(song.id, song.id, true);
         openModal(song);
     } else {
-        getDetailedSongInfo(song.title, song.artist) 
+        getDetailedSongInfo(song.title, song.artist)
             .then(x => {
                 console.log("X");
                 console.log(x);
@@ -47,7 +47,6 @@ function openModalForSong(song) {
         $('.modal-body #player').html(createSongPlayerByDeezId(id));
         $('#title').html(full_title || title || '--');
         $('#author').html(name|| artist || '--');
-        $('#link-row').css('display', 'table-row');
         $('#link').attr("href", link);
         // todo more fields probably
     }
@@ -57,7 +56,6 @@ function openModalForSong(song) {
         artist,
         full_title
     }) {
-
         if (arguments[0] == null) {
             //todo smth with null song
         }
@@ -70,7 +68,7 @@ function openModalForSong(song) {
         $('.modal-body #player').html("");
         $('#title').html(full_title || title || '--');
         $('#author').html(artist || '--');
-        $('#link-row').css('display', 'none');
+        $('#link').html("");
     }
 
 
@@ -113,4 +111,5 @@ function getDetailedSongInfo(title, artistName) {
             console.log(data);
             return data[0] || null;
         });
+
 }
