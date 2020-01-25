@@ -137,8 +137,8 @@ function renderTable() {
 
     let check = answersHistory.every(elem => !elem);
     if (check) {
-        console.log("Empty Answer History!");
-
+        resultsTableBlock.innerHTML +=
+            `<tr song_id="0"><th scope="row">${answersHistory.length}</th><td>---No result---</td></tr>`;
     } else {
 
         let lastAnswer = answersHistory[answersHistory.length - 1];
