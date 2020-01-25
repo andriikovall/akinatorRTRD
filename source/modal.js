@@ -111,4 +111,5 @@ function getDetailedSongInfo(title, artistName) {
             console.log(data);
             return data[0] || null;
         });
+
 }

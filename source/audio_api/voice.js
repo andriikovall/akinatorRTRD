@@ -62,7 +62,7 @@ function handleVoiceResponse({ result }) {
         return;
     }
     result.song_id = result.deezer.id;
-    clearTable();
     saveFetchResult([result]);
+    clearTable();
     showModal();
 }

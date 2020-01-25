@@ -43,13 +43,13 @@ function gmSound() {
     sessionStorage.setItem('mode', 'sound');
     document.getElementById('searchByLyricsButton').style.display = 'none';
     document.getElementById('textBlock').style.display = 'none';
-    document.getElementById('soundBlock').style.display = 'block';
+    document.getElementById('soundBlock').style.display = 'inline-block';
 }
 
 function gmText() {
     sessionStorage.setItem('mode', 'text');
     document.getElementById('searchByLyricsButton').style.display = 'block';
-    document.getElementById('textBlock').style.display = 'block';
+    document.getElementById('textBlock').style.display = 'inline-block';
     document.getElementById('soundBlock').style.display = 'none';
 }
 
@@ -57,7 +57,7 @@ function changeGamemode() {
     if (sessionStorage.getItem('mode') === 'sound') {
         gmText();
     } else if (sessionStorage.getItem('mode') === 'text') {
-        gmSound();  
+        gmSound();
     }
     const currRoundIndex = sessionStorage.getItem('currRound');
     const rounds = JSON.parse(sessionStorage.getItem('rounds'));

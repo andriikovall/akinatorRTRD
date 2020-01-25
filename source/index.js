@@ -5,8 +5,11 @@ const currentResultPlayer = document.getElementById("playerContainer");
 const supposeRejectButton = document.getElementById("supposeRejectButton");
 const supposeConfirmButton = document.getElementById("supposeConfirmButton");
 
+sessionStorage.setItem("playerPlaseholder", "true")
+
 function onSupposeReject(event) {
     console.log("suppose rejected");
+
     const answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
 
     if(answersHistory.length >= 5){
@@ -14,6 +17,7 @@ function onSupposeReject(event) {
         finishRound();
         increaseScore();
     }
+
     renderTable();
 }
 
@@ -32,11 +36,19 @@ function finishRound() {
     sessionStorage.setItem("answersHistory", JSON.stringify([]));
 }
 
+function onSearchByMicroStart(event) {
+    // я уже сделал похожые функции, так что нету смысла реализововать
+}
+
+function onSearchByMicroFinish(event) {
+
+}
+
 function onSearchByLyrics(event) {
     event.preventDefault();
 
-    searchByLyricsButton.innerHTML = 
-    `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    searchByLyricsButton.innerHTML =
+        `<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only">Searching...</span>
     </div>`;
     searchByLyricsButton.disabled = true;
@@ -73,6 +85,7 @@ function onSearchByLyrics(event) {
 
 function showModal() {
     let answVariant = shiftAnswersArray();
+
     openModalForSong(answVariant);
 }
 
@@ -90,16 +103,27 @@ function clearTable() {
 
 function onSongClicked(event) {
     event.preventDefault();
-
+    
     const target = event.target.tagName === 'TR' ? event.target : event.target.parentNode;
     const id = target.getAttribute('song_id');
-    if(id != 0){
-        document.getElementById('playerContainer').innerHTML = createSongPlayerByDeezId(id, 230);
+
+    console.log(id)
+    
+    const playerContainer = document.getElementById('playerContainer');
+    if(id != 0) {
+        document.getElementById('playerPlaceholder').style.display = "none";
+        playerContainer.style.display = "block";
+        playerContainer.style.height = '250px';
+        playerContainer.innerHTML = createSongPlayerByDeezId(id, 230);
     }
     else {
         console.log("SOng doesnt has a player");
-        // TOAST CASE NO PLAYER REQUIRED 
+        document.getElementById('playerPlaceholder').style.display = "block";
+        playerContainer.style.display = "none";
+        mdtoast("This song doesn't have a player", { duration: 7000 });          
     }
+
+
 }
 
 function renderTable() {
@@ -107,9 +131,11 @@ function renderTable() {
     // resultsTableBlock.innerHTML= "";
 
     let check = answersHistory.every(elem => !elem);
-    if (check){
+    if (check) {
         console.log("Empty Answer History!");
+
     } else  {
+
         let lastAnswer = answersHistory[answersHistory.length - 1];
         console.log("renderTable -> lastanswer");
         console.log(lastAnswer);
@@ -133,8 +159,7 @@ function shiftAnswersArray() {
     sessionStorage.setItem("answers", JSON.stringify(answersArray));
 
     let answersHistory = JSON.parse(sessionStorage.getItem("answersHistory"));
-
-    if(answersHistory.every(elem=>!elem) && !returnAnswer ){
+    if (!answersHistory) {
         console.log("Answers History is Empty");
         return null;
     }
@@ -211,7 +236,6 @@ function saveFetchResult(response) {
             sessionStorage.setItem("answers", JSON.stringify(answerArray));
         }
     }
-    
 }
 
 function recompileAnswers() {
